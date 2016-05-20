@@ -287,7 +287,7 @@ class ProgramPage
                     $html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
                     $html .= '</td><tr/>' . "\n";
                 } elseif ($type == 'url') {
-                    $html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr($k) . '">' . $v['name'] . '</label></th><td><input type="button" class="button" id="upload_media_file_button" value="' . __('Upload Image', $this->token) . '" data-uploader_title="Choose an image" data-uploader_button_text="Insert image file" /><input name="' . esc_attr($k) . '" type="text" id="upload_media_file" class="regular-text" value="' . esc_attr($data) . '" />' . "\n";
+                    $html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr($k) . '">' . $v['name'] . '</label></th><td><input type="button" class="button upload_media_file" id="' . esc_attr($k) . '_button" value="' . __('Upload Image', $this->token) . '" data-uploader_title="Choose an image" data-uploader_button_text="Insert image file" /><input name="' . esc_attr($k) . '" type="text" id="' . esc_attr($k) . '" class="regular-text" value="' . esc_attr($data) . '" />' . "\n";
                     $html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
                     $html .= '</td><tr/>' . "\n";
                 } else {
@@ -390,16 +390,6 @@ class ProgramPage
             wp_enqueue_style($this->token);
             wp_enqueue_style('animate');
             wp_enqueue_style('source-sans');
-
-            wp_register_script($this->token . '-js', esc_url($this->assets_url . 'js/scripts.js'), [
-                'jquery'
-            ], PROGRAM_PAGE_PLUGIN_VERSION);
-            wp_enqueue_script($this->token . '-js');
-
-            $localize = [
-                'ajaxurl' => admin_url('admin-ajax.php'),
-            ];
-            wp_localize_script($this->token . '-js', 'ProgramPage', $localize);
         }
 
     }
@@ -437,9 +427,27 @@ class ProgramPage
                 'section' => 'info'
             ];
 
+            $fields['cta'] = [
+                'name' => __('Call To Action', $this->token),
+                'description' => __('The call to action for your page', $this->token),
+                'placeholder' => 'WATCH THE VIDEO',
+                'type' => 'text',
+                'default' => 'WATCH THE VIDEO',
+                'section' => 'info'
+            ];
+
+            $fields['cta_url'] = [
+                'name' => __('Call To Action URL', $this->token),
+                'description' => __('The URL the user is directed to upon clicking the CTA button.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
             $fields['video_url'] = [
-                'name' => __('Video URL', $this->token),
-                'description' => __('The URL for the video on your page.', $this->token),
+                'name' => __('Video Embed URL', $this->token),
+                'description' => __('The embed code for your program video.', $this->token),
                 'placeholder' => '',
                 'type' => 'text',
                 'default' => '',

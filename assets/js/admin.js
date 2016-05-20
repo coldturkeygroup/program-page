@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
     file_frame.open();
   };
 
-  jQuery('#upload_media_file_button').click(function (event) {
+  jQuery('.upload_media_file').click(function (event) {
     event.preventDefault();
     jQuery.fn.ssp_upload_media_file(jQuery(this), false);
   });

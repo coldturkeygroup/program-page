@@ -3,7 +3,7 @@ Contributors: Aaron Huisinga
 Tags: real estate, platform, days on market
 Requires at least: 3.5
 Tested up to: 4.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 Custom info pages for Platform ad campaigns (currently supports the HIP Program).
 

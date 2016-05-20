@@ -13,6 +13,8 @@ global $program_page, $wp_query;
 $id = get_the_ID();
 $title = get_the_title();
 $logo = get_post_meta($id, 'logo', true);
+$cta = get_post_meta($id, 'cta', true);
+$cta_url = get_post_meta($id, 'cta_url', true);
 $video_url = get_post_meta($id, 'video_url', true);
 $broker = get_post_meta($id, 'legal_broker', true);
 $test_1_name = get_post_meta($id, 'test_1_name', true);
@@ -116,7 +118,7 @@ if ($hover_setting && $hover_setting != '') {
                                 <div class="line banner-line role-element leadstyle-container"></div>
                                 <p class="banner-list role-element leadstyle-text">no credit requirements | no income requirements</p>
                                 <div class="btn-inline-wrap">
-                                    <a class="btn btn-inline role-element leadstyle-link" href="<?= $video_url ?>" target="_blank">WATCH THE VIDEO</a>
+                                    <a class="btn btn-inline role-element leadstyle-link" href="<?= $cta_url ?>" target="_blank"><?= $cta ?></a>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +144,7 @@ if ($hover_setting && $hover_setting != '') {
                 </div>
                 <div class="col-xs-12 col-md-5 vcenter text-right text-xs-center text-sm-center role-element leadstyle-container">
                     <div class="video-container role-element leadstyle-video video" data-lp-responsive="height" data-lp-ratio-height="0.5625" data-lp-ratio-width="1.7777777777777777" style="width: 100%;">
-                        <iframe src="<?= $video_url ?>" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-aspectratio="0.5625" style="width: 458px; height: 257.625px;"></iframe>
+                        <?= $video_url ?>
                     </div>
                 </div>
             </div>
@@ -255,15 +257,30 @@ if ($hover_setting && $hover_setting != '') {
     </footer>
 
 <?php if ($retargeting != null) { ?>
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','//connect.facebook.net/en_US/fbevents.js');
-fbq('init', '<?= $retargeting ?>');
-fbq('track', "PageView");</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"/></noscript>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq)return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq)f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '<?= $retargeting ?>');
+        fbq('track', "PageView");</script>
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"/>
+    </noscript>
 <?php } ?>
 <?php wp_footer(); ?>
