@@ -6,52 +6,6 @@ jQuery('document').ready(function ($) {
         $('.btn-primary').removeAttr('disabled');
     });
 
-    // Email Validation
-    if (DaysOnMarket.mailgun !== undefined && DaysOnMarket.mailgun !== '') {
-        $('#email').mailgun_validator({
-            api_key: DaysOnMarket.mailgun,
-            in_progress: function () {
-                $('#email').parent().removeClass('has-warning has-error');
-                $(".mailcheck-suggestion").remove();
-                $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
-            },
-            success: function (data) {
-                $('#email').after(get_suggestion_str(data['is_valid'], data['did_you_mean']));
-            },
-            error: function () {
-                $("[type=submit]").removeClass("disabled").removeAttr("disabled");
-            }
-        });
-    }
-    // Parse Mailgun Responses
-    function get_suggestion_str(is_valid, alternate) {
-        if (is_valid) {
-            if (alternate) {
-                $('#email').parent().addClass('has-warning');
-                return '<div class="mailcheck-suggestion help-block">Did you mean <a href="#">' + alternate + '</a>?</div>';
-            }
-            if ($('#form-clicked').length) {
-                $('form').unbind().submit();
-                $("[type=submit]").addClass("disabled").attr("disabled", "disabled");
-            } else {
-                $("[type=submit]").removeClass("disabled").removeAttr("disabled");
-            }
-
-            return;
-        }
-        $('#email').parent().addClass('has-error');
-        if (alternate) {
-            return '<div class="mailcheck-suggestion help-block">This email is invalid. Did you mean <a href="#">' + alternate + '</a>?</div>';
-        }
-        return '<div class="mailcheck-suggestion help-block">This email is invalid.</div>';
-    }
-
-    $(".form-group").on("click", ".mailcheck-suggestion a", function (e) {
-        e.preventDefault();
-        $("#email").val($(this).text());
-        $("[type=submit]").removeClass("disabled").removeAttr("disabled");
-        $(".mailcheck-suggestion").remove();
-    });
     $('form').submit(function (e) {
         e.preventDefault();
         $(this).after('<input type="hidden" id="form-clicked" value="true">');

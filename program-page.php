@@ -1,33 +1,33 @@
-<?php namespace ColdTurkey\DaysOnMarket;
+<?php namespace ColdTurkey\ProgramPage;
 /*
- * Plugin Name: Days On Market
- * Version: 1.6
+ * Plugin Name: Program Page
+ * Version: 1.0
  * Plugin URI: http://www.coldturkeygroup.com/
- * Description: A form for prospective home sellers to fill out to figure out how long it might take them to sell their home.
+ * Description: Custom info pages for Platform ad campaigns
  * Author: Cold Turkey Group
  * Author URI: http://www.coldturkeygroup.com/
  * Requires at least: 4.0
  * Tested up to: 4.3
  *
- * @package Days On Market
+ * @package Program Page
  * @author Aaron Huisinga
  * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! defined( 'DAYS_MARKET_PLUGIN_PATH' ) )
-	define( 'DAYS_MARKET_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+if ( ! defined( 'PROGRAM_PAGE_PLUGIN_PATH' ) )
+	define( 'PROGRAM_PAGE_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-if ( ! defined( 'DAYS_MARKET_PLUGIN_VERSION' ) )
-	define( 'DAYS_MARKET_PLUGIN_VERSION', '1.6' );
+if ( ! defined( 'PROGRAM_PAGE_PLUGIN_VERSION' ) )
+	define( 'PROGRAM_PAGE_PLUGIN_VERSION', '1.6' );
 
-require_once( 'classes/class-days-on-market.php' );
+require_once( 'classes/class-program-page.php' );
 
-global $days_market;
-$days_market = new DaysOnMarket( __FILE__, new FrontDesk() );
+global $program_page;
+$program_page = new ProgramPage( __FILE__, new PlatformCRM() );
 
 if ( is_admin() ) {
-	require_once( 'classes/class-days-on-market-admin.php' );
-	new DaysOnMarket_Admin( __FILE__ );
+	require_once( 'classes/class-program-page-admin.php' );
+	new ProgramPage_Admin( __FILE__ );
 }

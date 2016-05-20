@@ -1,11 +1,11 @@
-<?php namespace ColdTurkey\DaysOnMarket;
+<?php namespace ColdTurkey\ProgramPage;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly.
 
 // Composer autoloader
-require_once DAYS_MARKET_PLUGIN_PATH . 'assets/vendor/autoload.php';
+require_once PROGRAM_PAGE_PLUGIN_PATH . 'assets/vendor/autoload.php';
 
-class DaysOnMarket
+class ProgramPage
 {
     private $dir;
     private $file;
@@ -14,15 +14,15 @@ class DaysOnMarket
     private $template_path;
     private $token;
     private $home_url;
-    private $frontdesk;
+    private $crm;
 
     /**
-     * Basic constructor for the Days On Market class
+     * Basic constructor for the Program Page class
      *
      * @param string $file
-     * @param FrontDesk $frontdesk
+     * @param PlatformCRM $crm
      */
-    public function __construct($file, FrontDesk $frontdesk)
+    public function __construct($file, PlatformCRM $crm)
     {
         global $wpdb;
         $this->dir = dirname($file);
@@ -31,11 +31,11 @@ class DaysOnMarket
         $this->assets_url = esc_url(trailingslashit(plugins_url('/assets/', $file)));
         $this->template_path = trailingslashit($this->dir) . 'templates/';
         $this->home_url = trailingslashit(home_url());
-        $this->token = 'pf_days_on_market';
-        $this->frontdesk = $frontdesk;
+        $this->token = 'pf_program_page';
+        $this->crm = $crm;
         $this->table_name = $wpdb->base_prefix . $this->token;
 
-        // Register 'pf_days_on_market' post type
+        // Register 'pf_program_page' post type
         add_action('init', [$this, 'register_post_type']);
 
         // Use built-in templates for landing pages
@@ -45,7 +45,6 @@ class DaysOnMarket
         // Handle form submissions
         add_action('wp_ajax_' . $this->token . '_submit_form', [$this, 'process_submission']);
         add_action('wp_ajax_nopriv_' . $this->token . '_submit_form', [$this, 'process_submission']);
-        add_action('admin_post_' . $this->token . '_remove_leads', [$this, 'remove_leads']);
 
         if (is_admin()) {
             add_action('admin_menu', [$this, 'meta_box_setup'], 20);
@@ -58,9 +57,6 @@ class DaysOnMarket
                 'register_custom_column_headings'
             ], 10, 1);
             add_filter('enter_title_here', [$this, 'change_default_title']);
-
-            // Create FrontDesk Campaigns for pages
-            add_action('publish_' . $this->token, [$this, 'create_frontdesk_campaign']);
         }
 
         // Flush rewrite rules on plugin activation
@@ -75,7 +71,6 @@ class DaysOnMarket
     public function rewrite_flush()
     {
         $this->register_post_type();
-        $this->build_database_table();
         flush_rewrite_rules();
     }
 
@@ -87,22 +82,22 @@ class DaysOnMarket
     public function register_post_type()
     {
         $labels = [
-            'name' => _x('Days On Market', 'post type general name', $this->token),
-            'singular_name' => _x('Days On Market', 'post type singular name', $this->token),
+            'name' => _x('Program Page', 'post type general name', $this->token),
+            'singular_name' => _x('Program Page', 'post type singular name', $this->token),
             'add_new' => _x('Add New', $this->token, $this->token),
-            'add_new_item' => sprintf(__('Add New %s', $this->token), __('Days On Market', $this->token)),
-            'edit_item' => sprintf(__('Edit %s', $this->token), __('Days On Market', $this->token)),
-            'new_item' => sprintf(__('New %s', $this->token), __('Days On Market', $this->token)),
-            'all_items' => sprintf(__('All %s', $this->token), __('Days On Market', $this->token)),
-            'view_item' => sprintf(__('View %s', $this->token), __('Days On Market', $this->token)),
-            'search_items' => sprintf(__('Search %a', $this->token), __('Days On Market', $this->token)),
-            'not_found' => sprintf(__('No %s Found', $this->token), __('Days On Market', $this->token)),
-            'not_found_in_trash' => sprintf(__('No %s Found In Trash', $this->token), __('Days On Market', $this->token)),
+            'add_new_item' => sprintf(__('Add New %s', $this->token), __('Program Page', $this->token)),
+            'edit_item' => sprintf(__('Edit %s', $this->token), __('Program Page', $this->token)),
+            'new_item' => sprintf(__('New %s', $this->token), __('Program Page', $this->token)),
+            'all_items' => sprintf(__('All %s', $this->token), __('Program Page', $this->token)),
+            'view_item' => sprintf(__('View %s', $this->token), __('Program Page', $this->token)),
+            'search_items' => sprintf(__('Search %a', $this->token), __('Program Page', $this->token)),
+            'not_found' => sprintf(__('No %s Found', $this->token), __('Program Page', $this->token)),
+            'not_found_in_trash' => sprintf(__('No %s Found In Trash', $this->token), __('Program Page', $this->token)),
             'parent_item_colon' => '',
-            'menu_name' => __('Days On Market', $this->token)
+            'menu_name' => __('Program Page', $this->token)
         ];
 
-        $slug = __('days-on-market', $this->token);
+        $slug = __('program-page', $this->token);
         $custom_slug = get_option($this->token . '_slug');
         if ($custom_slug && strlen($custom_slug) > 0 && $custom_slug != '')
             $slug = $custom_slug;
@@ -125,51 +120,6 @@ class DaysOnMarket
         ];
 
         register_post_type($this->token, $args);
-    }
-
-    /**
-     * Construct the actual database table that
-     * will be used with all of the pages for
-     * this plugin. The table stores data
-     * from visitors and form submissions.
-     *
-     */
-    public function build_database_table()
-    {
-        global $wpdb;
-        $table_name = $wpdb->base_prefix . $this->token;
-
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-            $charset_collate = '';
-
-            if (!empty($wpdb->charset)) {
-                $charset_collate = "DEFAULT CHARACTER SET {$wpdb->charset}";
-            }
-
-            if (!empty($wpdb->collate)) {
-                $charset_collate .= " COLLATE {$wpdb->collate}";
-            }
-
-            $sql = "CREATE TABLE `$table_name` (
-								`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-								`frontdesk_id` int(10) unsigned DEFAULT NULL,
-								`blog_id` int(10) unsigned DEFAULT 0,
-								`first_name` varchar(255) DEFAULT NULL,
-								`email` varchar(255) DEFAULT NULL,
-								`property_type` varchar(255) NOT NULL,
-								`property_location` varchar(255) DEFAULT NULL,
-								`num_beds` int(10) DEFAULT NULL,
-								`num_baths` int(10) DEFAULT NULL,
-								`sq_feet` int(20) DEFAULT NULL,
-								`features` text DEFAULT NULL,
-								`desired_price` varchar(255) DEFAULT NULL,
-								`created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-								PRIMARY KEY (`id`)
-							) $charset_collate;";
-
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
-        }
     }
 
     /**
@@ -217,14 +167,14 @@ class DaysOnMarket
         $messages[$this->token] = [
             0 => '', // Unused. Messages start at index 1.
             1 => sprintf(__('Page updated. %sView page%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
-            4 => __('Days on Market funnel updated.', $this->token),
+            4 => __('Program Page updated.', $this->token),
             /* translators: %s: date and time of the revision */
-            5 => isset($_GET['revision']) ? sprintf(__('Days on Market funnel restored to revision from %s.', $this->token), wp_post_revision_title((int)$_GET['revision'], false)) : false,
-            6 => sprintf(__('Days on Market funnel published. %sView Funnel%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
-            7 => __('Days on Market funnel saved.', $this->token),
-            8 => sprintf(__('Days on Market funnel submitted. %sPreview Funnel%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
-            9 => sprintf(__('Days on Market funnel scheduled for: %1$s. %2$sPreview Funnel%3$s.', $this->token), '<strong>' . date_i18n(__('M j, Y @ G:i', $this->token), strtotime($post->post_date)) . '</strong>', '<a target="_blank" href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
-            10 => sprintf(__('Days on Market funnel draft updated. %sPreview Funnel%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
+            5 => isset($_GET['revision']) ? sprintf(__('Program Page restored to revision from %s.', $this->token), wp_post_revision_title((int)$_GET['revision'], false)) : false,
+            6 => sprintf(__('Program Page published. %sView Page%s.', $this->token), '<a href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
+            7 => __('Program Page saved.', $this->token),
+            8 => sprintf(__('Program Page submitted. %sPreview Page%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
+            9 => sprintf(__('Program Page scheduled for: %1$s. %2$sPreview Page%3$s.', $this->token), '<strong>' . date_i18n(__('M j, Y @ G:i', $this->token), strtotime($post->post_date)) . '</strong>', '<a target="_blank" href="' . esc_url(get_permalink($post_ID)) . '">', '</a>'),
+            10 => sprintf(__('Program Page draft updated. %sPreview Page%s.', $this->token), '<a target="_blank" href="' . esc_url(add_query_arg('preview', 'true', get_permalink($post_ID))) . '">', '</a>'),
         ];
 
         return $messages;
@@ -232,7 +182,7 @@ class DaysOnMarket
 
     /**
      * Build the meta box containing our custom fields
-     * for our Days on Market post type creator & editor.
+     * for our Program Page post type creator & editor.
      *
      */
     public function meta_box_setup()
@@ -252,7 +202,7 @@ class DaysOnMarket
 
     /**
      * Build the custom fields that will be displayed
-     * in the meta box for our Days on Market post type.
+     * in the meta box for our Program Page post type.
      *
      * @param $post
      * @param $meta
@@ -355,7 +305,7 @@ class DaysOnMarket
 
     /**
      * Save the data entered by the user using
-     * the custom fields for our Days on Market post type.
+     * the custom fields for our Program Page post type.
      *
      * @param integer $post_id
      *
@@ -426,10 +376,10 @@ class DaysOnMarket
     public function enqueue_scripts()
     {
         if (is_singular($this->token)) {
-            wp_register_style($this->token, esc_url($this->assets_url . 'css/daysonmarket.css'), [], DAYS_MARKET_PLUGIN_VERSION);
-            wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], DAYS_MARKET_PLUGIN_VERSION);
-            wp_register_style('roboto', 'http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300');
-            wp_register_style('robo-slab', 'http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100');
+            wp_register_style($this->token, esc_url($this->assets_url . 'css/programpage.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
+            wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
+            wp_register_style('roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300');
+            wp_register_style('robo-slab', 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100');
             wp_enqueue_style($this->token);
             wp_enqueue_style('animate');
             wp_enqueue_style('roboto');
@@ -437,18 +387,13 @@ class DaysOnMarket
 
             wp_register_script($this->token . '-js', esc_url($this->assets_url . 'js/scripts.js'), [
                 'jquery'
-            ], DAYS_MARKET_PLUGIN_VERSION);
+            ], PROGRAM_PAGE_PLUGIN_VERSION);
             wp_enqueue_script($this->token . '-js');
-            wp_register_script('mailgun-validator', esc_url($this->assets_url . 'js/mailgun-validator.js'), [
-                'jquery'
-            ], DAYS_MARKET_PLUGIN_VERSION);
-            wp_enqueue_script('mailgun-validator');
 
             $localize = [
                 'ajaxurl' => admin_url('admin-ajax.php'),
-                'mailgun' => defined('MAILGUN_PUBLIC') ? MAILGUN_PUBLIC : ''
             ];
-            wp_localize_script($this->token . '-js', 'DaysOnMarket', $localize);
+            wp_localize_script($this->token . '-js', 'ProgramPage', $localize);
         }
 
     }
@@ -456,7 +401,7 @@ class DaysOnMarket
     /**
      * Define the custom fields that will
      * be displayed and used for our
-     * Days on Market post type.
+     * Program Page post type.
      *
      * @param $meta_box
      *
@@ -576,15 +521,6 @@ class DaysOnMarket
                 'section' => 'info'
             ];
 
-            $fields['email'] = [
-                'name' => __('Notification Email', $this->token),
-                'description' => __('This address will be emailed when a user opts-into your ad. If left empty, emails will be sent to the default address for your site.', $this->token),
-                'placeholder' => '',
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
-            ];
-
             $fields['primary_color'] = [
                 'name' => __('Primary Color', $this->token),
                 'description' => __('Change the primary color of the funnel page.', $this->token),
@@ -639,7 +575,7 @@ class DaysOnMarket
         // Single house hunter page template
         if (is_single() && get_post_type() == $this->token) {
             if (!defined('PLATFORM_FUNNEL'))
-                define('PLATFORM_FUNNEL', 'DAYS_MARKET');
+                define('PLATFORM_FUNNEL', 'PROGRAM_PAGE');
 
             include($this->template_path . 'single-page.php');
             exit;
@@ -648,7 +584,7 @@ class DaysOnMarket
 
     /**
      * Get the optional media file selected for
-     * a defined Days on Market funnel.
+     * a defined Program Page funnel.
      *
      * @param integer $pageID
      *
@@ -667,86 +603,7 @@ class DaysOnMarket
     }
 
     /**
-     * Create a campaign on tryfrontdesk.com
-     * for a defined Days on Market created page.
-     *
-     * @param integer $post_ID
-     *
-     * @return bool
-     */
-    public function create_frontdesk_campaign($post_ID)
-    {
-        if (get_post_type($post_ID) != $this->token)
-            return false;
-
-        global $wpdb;
-        $permalink = get_permalink($post_ID);
-
-        // See if we're using domain mapping
-        $wpdb->dmtable = $wpdb->base_prefix . 'domain_mapping';
-        if ($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->dmtable}'") == $wpdb->dmtable) {
-            $blog_id = get_current_blog_id();
-            $options_table = $wpdb->base_prefix . $blog_id . '_' . 'options';
-
-            $mapped = $wpdb->get_var("SELECT domain FROM {$wpdb->dmtable} WHERE blog_id = '{$blog_id}' ORDER BY CHAR_LENGTH(domain) DESC LIMIT 1");
-            $domain = $wpdb->get_var("SELECT option_value FROM {$options_table} WHERE option_name = 'siteurl' LIMIT 1");
-
-            if ($mapped)
-                $permalink = str_replace($domain, 'http://' . $mapped, $permalink);
-        }
-
-        if (($_POST['post_status'] != 'publish') || ($_POST['original_post_status'] == 'publish')) {
-            $campaign_id = get_post_meta($post_ID, 'frontdesk_campaign', true);
-
-            if ($campaign_id != '' && is_int($campaign_id)) {
-                $this->frontdesk->updateCampaign($campaign_id, get_the_title($post_ID), $permalink);
-            }
-
-            return true;
-        }
-
-        $campaign_id = $this->frontdesk->createCampaign(get_the_title($post_ID), $permalink);
-
-        if (is_int($campaign_id)) {
-            update_post_meta($post_ID, 'frontdesk_campaign', $campaign_id);
-        }
-    }
-
-    /**
-     * Email the quiz results to the website admin
-     *
-     * @param $user_id
-     * @param $page_id
-     */
-    protected function emailResultsToAdmin($user_id, $page_id)
-    {
-        // Get the prospect data saved previously
-        global $wpdb;
-        $subscriber = $wpdb->get_row('SELECT * FROM ' . $this->table_name . ' WHERE id = \'' . $user_id . '\' ORDER BY id DESC LIMIT 0,1');
-        $email = get_bloginfo('admin_email');
-
-        if (get_post_meta($page_id, 'email', true) != null && filter_var(get_post_meta($page_id, 'email', true), FILTER_VALIDATE_EMAIL)) {
-            $email = get_post_meta($page_id, 'email', true);
-        }
-
-        // Format the email and send it
-        $headers[] = 'From: Platform <info@platform.marketing>';
-        $headers[] = 'Reply-To: ' . $subscriber->email;
-        $headers[] = 'Content-Type: text/html; charset=UTF-8';
-        $subject = 'New Days on Market Funnel Submission';
-        // Load template into message
-        ob_start();
-        include $this->template_path . 'single-email.php';
-        $message = ob_get_contents();
-        ob_end_clean();
-
-        wp_mail($email, $subject, $message, $headers);
-    }
-
-    /**
      * Process the form submission from the user.
-     * Create a DB record for the user, and return the ID.
-     * Create a prospect on tryfrontdesk.com with the given data.
      *
      */
     public function process_submission()
@@ -756,73 +613,6 @@ class DaysOnMarket
             $sq_ft = 0;
             $blog_id = get_current_blog_id();
             $page_id = sanitize_text_field($_POST['page_id']);
-            $first_name = sanitize_text_field($_POST['first_name']);
-            $email = sanitize_text_field($_POST['email']);
-            $frontdesk_campaign = sanitize_text_field($_POST['frontdesk_campaign']);
-            $type = sanitize_text_field($_POST['type']);
-            $location = sanitize_text_field($_POST['location']);
-            $num_beds = sanitize_text_field($_POST['num_beds']);
-            $num_baths = sanitize_text_field($_POST['num_baths']);
-            $features = sanitize_text_field($_POST['features']);
-            $desired_price = str_replace(',', '', sanitize_text_field($_POST['desired_price']));
-            if (isset($_POST['sq_ft'])) {
-                $sq_ft = str_replace(',', '', sanitize_text_field($_POST['sq_ft']));
-            }
-
-            $wpdb->query($wpdb->prepare(
-                'INSERT INTO ' . $this->table_name . '
-				 ( blog_id, first_name, email, property_type, property_location, num_beds, num_baths, sq_feet, features, desired_price, created_at )
-				 VALUES ( %d, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW() )',
-                [
-                    $blog_id,
-                    $first_name,
-                    $email,
-                    $type,
-                    $location,
-                    $num_beds,
-                    $num_baths,
-                    $sq_ft,
-                    $features,
-                    $desired_price
-                ]
-            ));
-
-            $user_id = $wpdb->insert_id;
-
-            // Create the prospect on FrontDesk
-            $frontdesk_id = $this->frontdesk->createProspect([
-                'campaign_id' => $frontdesk_campaign,
-                'first_name' => $first_name,
-                'email' => $email
-            ]);
-
-            if ($frontdesk_id != null) {
-                $wpdb->query($wpdb->prepare(
-                    'UPDATE ' . $this->table_name . '
-					 SET frontdesk_id = %d
-					 WHERE id = \'' . $user_id . '\'',
-                    [
-                        $frontdesk_id
-                    ]
-                ));
-            }
-
-            // Create a note for the FrontDesk prospect
-            if ($frontdesk_id != null) {
-                $content = '<p>
-                          <strong>Type: </strong>' . $type . '<br>
-                          <strong>Location: </strong>' . $location . '<br>
-                          <strong># Bedrooms: </strong>' . $num_beds . '<br>
-                          <strong># Bathrooms: </strong>' . $num_baths . '<br>
-                          <strong>Square Feet: </strong>' . $sq_ft . '<br>
-                          <strong>Features: </strong>' . nl2br($features) . '<br>
-                          <strong>Desired Sales Price: </strong>$' . number_format($desired_price) . '<br>
-                        </p>';
-                $this->frontdesk->createNote($frontdesk_id, 'Days on Market Responses', $content);
-            }
-
-            // Email the blog owner the details for the new prospect
-            $this->emailResultsToAdmin($user_id, $page_id);
 
             echo json_encode(['status' => 'success']);
             die();
@@ -842,29 +632,9 @@ class DaysOnMarket
         $screen = get_current_screen();
 
         if ($this->token == $screen->post_type) {
-            $title = 'Enter a title for your Days on Market funnel';
+            $title = 'Enter a title for your Program Page';
         }
 
         return $title;
     }
-
-    /**
-     * Remove the specified leads from the
-     * leads table and the database.
-     */
-    public function remove_leads()
-    {
-        global $wpdb;
-        $leads_to_delete = implode(',', $_POST['delete_lead']);
-
-        // Update the prospect data
-        $wpdb->query($wpdb->prepare(
-            'DELETE FROM `' . $this->table_name . '`
-			 WHERE `id` IN (' . $leads_to_delete . ')'
-        ));
-
-        wp_redirect(admin_url('edit.php?post_type=' . $this->token . '&page=' . $this->token . '_leads&deleted=true'));
-        die();
-    }
-
 }

@@ -1,14 +1,14 @@
-<?php namespace ColdTurkey\DaysOnMarket;
+<?php namespace ColdTurkey\ProgramPage;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly.
 
 // Composer autoloader
-require_once DAYS_MARKET_PLUGIN_PATH . 'assets/vendor/autoload.php';
+require_once PROGRAM_PAGE_PLUGIN_PATH . 'assets/vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class FrontDesk
+class PlatformCRM
 {
 
     protected $token;
@@ -18,14 +18,14 @@ class FrontDesk
     protected $guzzle;
 
     /**
-     * Basic constructor for the FrontDesk class
+     * Basic constructor for the Platform CRM class
      *
      * @param int $api_version
      */
     public function __construct($api_version = 1)
     {
-        $this->token = 'pf_days_on_market';
-        $this->api_key = get_option('pf_seller_quiz_frontdesk_key');
+        $this->token = 'pf_program_page';
+        $this->api_key = get_option('pf_program_page_frontdesk_key');
         if (get_option('pf_frontdesk_key')) {
             $this->api_key = get_option('pf_frontdesk_key');
         }
@@ -38,7 +38,7 @@ class FrontDesk
     }
 
     /**
-     * Create a campaign on tryfrontdesk.com
+     * Create a campaign on platformcrm.com
      * using the given data.
      *
      * @param string $title
@@ -52,7 +52,7 @@ class FrontDesk
                     'body' => [
                         'key' => $this->api_key,
                         'title' => $title,
-                        'description' => 'Campaign for Platform Days on Market Funnel',
+                        'description' => 'Campaign for Platform Program Page Funnel',
                         'type' => 'Platform',
                         'total_cost' => '10000',
                         'source' => $permalink
@@ -69,7 +69,7 @@ class FrontDesk
     }
 
     /**
-     * Update an existing FrontDesk campaign
+     * Update an existing Platform CRM campaign
      * with a new title or permalink.
      *
      * @param $id
@@ -90,7 +90,7 @@ class FrontDesk
     }
 
     /**
-     * Create a prospect on tryfrontdesk.com
+     * Create a prospect on platformcrm.com
      * using the given data.
      *
      * @param array $data
@@ -120,7 +120,7 @@ class FrontDesk
     }
 
     /**
-     * Update an existing prospect on tryfrontdesk.com
+     * Update an existing prospect on platformcrm.com
      * using the given data.
      *
      * @param int $id
@@ -157,7 +157,7 @@ class FrontDesk
     }
 
     /**
-     * Create a note for an existing FrontDesk prospect
+     * Create a note for an existing Platform CRM prospect
      *
      * @param $id
      * @param $title
