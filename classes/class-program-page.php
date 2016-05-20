@@ -192,6 +192,11 @@ class ProgramPage
             'meta_box_content'
         ], $this->token, 'normal', 'high', ['type' => 'basic']);
 
+        add_meta_box($this->token . '-testimonials', __('Program Testimonials', $this->token), [
+            $this,
+            'meta_box_content'
+        ], $this->token, 'normal', 'high', ['type' => 'testimonials']);
+
         add_meta_box($this->token . '-marketing', __('Marketing Details', $this->token), [
             $this,
             'meta_box_content'
@@ -378,12 +383,10 @@ class ProgramPage
         if (is_singular($this->token)) {
             wp_register_style($this->token, esc_url($this->assets_url . 'css/programpage.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
             wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
-            wp_register_style('roboto', 'https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300');
-            wp_register_style('robo-slab', 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100');
+            wp_register_style('source-sans', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic%7CComfortaa:400,700');
             wp_enqueue_style($this->token);
             wp_enqueue_style('animate');
-            wp_enqueue_style('roboto');
-            wp_enqueue_style('roboto-slab');
+            wp_enqueue_style('source-sane');
 
             wp_register_script($this->token . '-js', esc_url($this->assets_url . 'js/scripts.js'), [
                 'jquery'
@@ -412,85 +415,31 @@ class ProgramPage
         $fields = [];
 
         if ($meta_box == 'basic' || $meta_box == 'all') {
-            $fields['headline'] = [
-                'name' => __('Headline', $this->token),
-                'description' => __('The headline for your page.', $this->token),
-                'placeholder' => __('Listing Calculator', $this->token),
-                'type' => 'text',
-                'default' => 'Listing Calculator',
-                'section' => 'info'
-            ];
-
-            $fields['subheadline'] = [
-                'name' => __('Sub-Headline', $this->token),
-                'description' => __('The sub-headline for your page.', $this->token),
-                'placeholder' => __('How long will it take to sell my home?', $this->token),
-                'type' => 'text',
-                'default' => 'How long will it take to sell my home?',
-                'section' => 'info'
-            ];
-
-            $fields['call_to_action'] = [
-                'name' => __('Your Call To Action', $this->token),
-                'description' => __('The call to action for users to give you their contact information.', $this->token),
-                'placeholder' => __('Get My Results!', $this->token),
-                'type' => 'text',
-                'default' => 'Get My Results!',
-                'section' => 'info'
-            ];
-
-            $fields['modal_title'] = [
-                'name' => __('Modal Title', $this->token),
-                'description' => __('The title for the modal shown after CTA button is clicked.', $this->token),
-                'placeholder' => __('Get My Results!', $this->token),
-                'type' => 'text',
-                'default' => 'Where should we send your results?',
-                'section' => 'info'
-            ];
-
-            $fields['modal_subtitle'] = [
-                'name' => __('Modal Subtitle', $this->token),
-                'description' => __('The subtitle for the modal shown after CTA button is clicked.', $this->token),
-                'placeholder' => '',
-                'type' => 'text',
-                'default' => 'How long will it take to sell a <span id="sq_ft-answer"></span> square foot <span id="type-answer"></span> (<span id="num_beds-answer"></span> bedrooms, <span id="num_baths-answer"></span> bathrooms) located in <span id="location-answer"></span>.',
-                'section' => 'info'
-            ];
-
-            $fields['modal_button'] = [
-                'name' => __('Modal Button', $this->token),
-                'description' => __('The submit button text for the modal shown after CTA button is clicked.', $this->token),
-                'placeholder' => __('See My Results', $this->token),
-                'type' => 'text',
-                'default' => 'See My Results',
-                'section' => 'info'
-            ];
-
-            $fields['show_sqft'] = [
-                'name' => __('Show Square Footage Field', $this->token),
-                'description' => __('If set to no, the square footage field will not be shown', $this->token),
+            $fields['program'] = [
+                'name' => __('Program For Page', $this->token),
+                'description' => __('Which program is this page for?', $this->token),
                 'placeholder' => '',
                 'type' => 'select',
                 'default' => 'yes',
-                'options' => ['no', 'yes'],
+                'options' => ['hip' => 'HIP Program'],
                 'section' => 'info'
             ];
 
-            $fields['city_placeholder'] = [
-                'name' => __('City Input Placeholder', $this->token),
-                'description' => __('The placeholder to be shown in the City field before a user enters any text.', $this->token),
-                'placeholder' => __('Chicago', $this->token),
-                'type' => 'text',
-                'default' => 'Chicago',
-                'section' => 'info'
-            ];
-
-            $fields['home_valuator'] = [
-                'name' => __('Link To Home Valuator', $this->token),
-                'description' => __('The last step of the funnel allows you to link the user to your Home Valuator. Enter the link for the funnel here.', $this->token),
+            $fields['logo'] = [
+                'name' => __('Logo Photo', $this->token),
+                'description' => __('The logo to be used in the funnel.', $this->token),
                 'placeholder' => '',
-                'type' => 'posts',
-                'default' => 'pf_valuator',
+                'type' => 'url',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['video_url'] = [
+                'name' => __('Video URL', $this->token),
+                'description' => __('The URL for the video on your page.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
                 'section' => 'info'
             ];
 
@@ -499,24 +448,6 @@ class ProgramPage
                 'description' => __('This will be displayed on the bottom of the page.', $this->token),
                 'placeholder' => '',
                 'type' => 'text',
-                'default' => '',
-                'section' => 'info'
-            ];
-
-            $fields['name'] = [
-                'name' => __('Your Name', $this->token),
-                'description' => __('Your name for introducing you at the end of the funnel..', $this->token),
-                'placeholder' => '',
-                'type' => 'text',
-                'default' => '',
-                'section' => 'info'
-            ];
-
-            $fields['photo'] = [
-                'name' => __('Your Photo', $this->token),
-                'description' => __('A photo of you for the thank you page of the funnel.', $this->token),
-                'placeholder' => '',
-                'type' => 'url',
                 'default' => '',
                 'section' => 'info'
             ];
@@ -540,22 +471,121 @@ class ProgramPage
             ];
         }
 
-        if ($meta_box == 'marketing' || $meta_box == 'all') {
-            // Step before opt-in (after clicking button, before opt-in)
-            $fields['retargeting'] = [
-                'name' => __('Facebook Pixel - Retargeting (optional)', $this->token),
-                'description' => __('Facebook Pixel to allow retargeting of people that view this page.', $this->token),
-                'placeholder' => __('Ex: 4123423454', $this->token),
+        if ($meta_box == 'testimonials' || $meta_box == 'all') {
+            $fields['test_1_name'] = [
+                'name' => __('Testimonial 1 Name', $this->token),
+                'description' => __('The name for the first testimonial.', $this->token),
+                'placeholder' => 'John Smith',
                 'type' => 'text',
                 'default' => '',
                 'section' => 'info'
             ];
 
-            // After opt-in
-            $fields['conversion'] = [
-                'name' => __('Facebook Pixel - Conversion (optional)', $this->token),
-                'description' => __('Facebook Pixel to allow conversion tracking of people that submit this page.', $this->token),
-                'placeholder' => __('Ex: 170432123454', $this->token),
+            $fields['test_1_job'] = [
+                'name' => __('Testimonial 1 Occupation', $this->token),
+                'description' => __('The occupation for the first testimonial.', $this->token),
+                'placeholder' => 'Surgical Technologist',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_1_text'] = [
+                'name' => __('Testimonial 1 Text', $this->token),
+                'description' => __('The text for the first testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_1_photo'] = [
+                'name' => __('Testimonial 1 Photo', $this->token),
+                'description' => __('The photo for the first testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'url',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_2_name'] = [
+                'name' => __('Testimonial 2 Name', $this->token),
+                'description' => __('The name for the second testimonial.', $this->token),
+                'placeholder' => 'John Smith',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_2_job'] = [
+                'name' => __('Testimonial 2 Occupation', $this->token),
+                'description' => __('The occupation for the second testimonial.', $this->token),
+                'placeholder' => 'Surgical Technologist',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_2_text'] = [
+                'name' => __('Testimonial 2 Text', $this->token),
+                'description' => __('The text for the second testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_2_photo'] = [
+                'name' => __('Testimonial 2 Photo', $this->token),
+                'description' => __('The photo for the second testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'url',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_3_name'] = [
+                'name' => __('Testimonial 3 Name', $this->token),
+                'description' => __('The name for the third testimonial.', $this->token),
+                'placeholder' => 'John Smith',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_3_job'] = [
+                'name' => __('Testimonial 3 Occupation', $this->token),
+                'description' => __('The occupation for the third testimonial.', $this->token),
+                'placeholder' => 'Surgical Technologist',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_3_text'] = [
+                'name' => __('Testimonial 3 Text', $this->token),
+                'description' => __('The text for the third testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
+            $fields['test_3_photo'] = [
+                'name' => __('Testimonial 3 Photo', $this->token),
+                'description' => __('The photo for the third testimonial.', $this->token),
+                'placeholder' => '',
+                'type' => 'url',
+                'default' => '',
+                'section' => 'info'
+            ];
+        }
+
+        if ($meta_box == 'marketing' || $meta_box == 'all') {
+            $fields['retargeting'] = [
+                'name' => __('Facebook Pixel - Retargeting (optional)', $this->token),
+                'description' => __('Facebook Pixel to allow retargeting of people that view this page.', $this->token),
+                'placeholder' => __('Ex: 4123423454', $this->token),
                 'type' => 'text',
                 'default' => '',
                 'section' => 'info'
@@ -572,12 +602,13 @@ class ProgramPage
      */
     public function page_templates()
     {
-        // Single house hunter page template
         if (is_single() && get_post_type() == $this->token) {
-            if (!defined('PLATFORM_FUNNEL'))
+            if (!defined('PLATFORM_FUNNEL')) {
                 define('PLATFORM_FUNNEL', 'PROGRAM_PAGE');
+            }
 
-            include($this->template_path . 'single-page.php');
+            $program = get_post_meta(get_the_ID(), 'program', true);
+            include($this->template_path . $program . '-page.php');
             exit;
         }
     }

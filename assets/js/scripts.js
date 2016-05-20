@@ -6,45 +6,6 @@ jQuery('document').ready(function ($) {
         $('.btn-primary').removeAttr('disabled');
     });
 
-    $('form').submit(function (e) {
-        e.preventDefault();
-        $(this).after('<input type="hidden" id="form-clicked" value="true">');
-        $('#email').trigger('focusout');
-    });
-
-    // Show results modal
-    $('#get-results').click(function () {
-        $('.alert').remove();
-
-        var validated = 1;
-
-        $('.validate').each(function () {
-            if ($(this).val() === '') {
-                $('#subtitle').after('<div class="alert alert-danger"><strong>Whoops!</strong> You must fill out all of the fields before searching!</div>');
-                validated = 0;
-                return false;
-            }
-
-            $('#' + $(this).attr('id') + '-answer').text($(this).val());
-        });
-
-        $('#num_baths,#num_beds,#desired_price,#sq_ft').each(function () {
-            var numbers_comma = /^[0-9,]*$/;
-
-            if (!numbers_comma.test($(this).val())) {
-                var label = $("label[for='" + $(this).attr('id') + "']").text();
-                $('#subtitle').after('<div class="alert alert-danger"><strong>Whoops!</strong> The value of ' + label + ' must be a number!</div>');
-                validated = 0;
-            }
-        });
-
-        if (validated == 1) {
-            $('#get-results-modal').modal('show');
-        }
-
-        return false;
-    });
-
     // Submit quiz results
     $('#submit-results').click(function (e) {
         e.preventDefault();
