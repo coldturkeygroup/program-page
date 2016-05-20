@@ -381,12 +381,15 @@ class ProgramPage
     public function enqueue_scripts()
     {
         if (is_singular($this->token)) {
-            wp_register_style($this->token, esc_url($this->assets_url . 'css/programpage.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
+            $program = get_post_meta(get_the_ID(), 'program', true);
+            if ($program == 'HIP Program') {
+                wp_register_style($this->token, esc_url($this->assets_url . 'css/hip-page.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
+            }
             wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
-            wp_register_style('source-sans', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic%7CComfortaa:400,700');
+            wp_register_style('source-sans', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic|Comfortaa:400,700');
             wp_enqueue_style($this->token);
             wp_enqueue_style('animate');
-            wp_enqueue_style('source-sane');
+            wp_enqueue_style('source-sans');
 
             wp_register_script($this->token . '-js', esc_url($this->assets_url . 'js/scripts.js'), [
                 'jquery'
@@ -608,7 +611,9 @@ class ProgramPage
             }
 
             $program = get_post_meta(get_the_ID(), 'program', true);
-            include($this->template_path . $program . '-page.php');
+            if ($program == 'HIP Program') {
+                include($this->template_path . 'hip-page.php');
+            }
             exit;
         }
     }
