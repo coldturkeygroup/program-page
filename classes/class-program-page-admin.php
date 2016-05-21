@@ -34,8 +34,11 @@ class ProgramPage_Admin
         // Add settings link to plugins page
         add_filter('plugin_action_links_' . plugin_basename($this->file), [$this, 'add_settings_link']);
 
-        // Load scripts for settings page
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts'], 10);
+        // Load scripts for posts
+        add_action('admin_print_scripts-post-new.php', [$this, 'enqueue_admin_styles'], 10);
+        add_action('admin_print_scripts-post.php', [$this, 'enqueue_admin_styles'], 10);
+        add_action('admin_print_scripts-post-new.php', [$this, 'enqueue_admin_scripts'], 10);
+        add_action('admin_print_scripts-post.php', [$this, 'enqueue_admin_scripts'], 10);
 
         // Display notices in the WP admin
         add_action('admin_notices', [$this, 'admin_notices'], 10);
@@ -70,19 +73,33 @@ class ProgramPage_Admin
     }
 
     /**
+     * Register the stylesheets that will be
+     * used for our scripts in the dashboard.
+     *
+     */
+    public function enqueue_admin_styles()
+    {
+        global $post_type;
+        if ($post_type == $this->token) {
+            wp_enqueue_style('wp-color-picker');
+        }
+    }
+
+    /**
      * Register the Javascript files used by
      * the plugin in the WordPress dashboard
      *
      */
     public function enqueue_admin_scripts()
     {
-        global $wp_version;
-        // Admin JS
-        wp_register_script($this->token . '-admin', esc_url($this->assets_url . 'js/admin.js'), ['jquery']);
-        wp_enqueue_script($this->token . '-admin');
-
-        if ($wp_version >= 3.5)
-            wp_enqueue_media();
+        global $post_type;
+        if ($post_type == $this->token) {
+            wp_register_script($this->token . '-admin', esc_url($this->assets_url . 'js/admin.js'), [
+                'jquery',
+                'wp-color-picker'
+            ]);
+            wp_enqueue_script($this->token . '-admin');
+        }
     }
 
     /**

@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
     // Uploading files
     var file_frame;
 
-    jQuery.fn.ssp_upload_media_file = function (button) {
+    jQuery.fn.program_page_upload_media_file = function (button) {
         var button_id = button.attr('id');
         var field_id = button_id.replace('_button', '');
 
@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
 
     jQuery('.upload_media_file').click(function (event) {
         event.preventDefault();
-        jQuery.fn.ssp_upload_media_file(jQuery(this));
+        jQuery.fn.program_page_upload_media_file(jQuery(this));
     });
 
 });
