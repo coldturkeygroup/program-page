@@ -335,8 +335,13 @@ class ProgramPage
 
         foreach ($fields as $f) {
 
-            if (isset($_POST[$f]))
-                ${$f} = strip_tags(trim($_POST[$f]));
+            if (isset($_POST[$f])) {
+                ${$f} = $_POST[$f];
+
+                if ($f != 'video_url') {
+                    ${$f} = strip_tags(trim($_POST[$f]));
+                }
+            }
 
             // Escape the URLs.
             if ('url' == $field_data[$f]['type'])
