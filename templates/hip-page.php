@@ -40,10 +40,8 @@ if (!$title || $title == '') {
 }
 
 // Get the page colors
-if (function_exists('of_get_option')) {
-    $primary_color = of_get_option('primary_color');
-    $hover_color = of_get_option('secondary_color');
-}
+$primary_color = '#2eb9ff';
+$hover_color = '#2eb9ff';
 
 $color_setting = get_post_meta($id, 'primary_color', true);
 $hover_setting = get_post_meta($id, 'hover_color', true);
@@ -132,7 +130,7 @@ if ($hover_setting && $hover_setting != '') {
                 <div class="row">
                     <div class="col-xs-12 col-md-11 col-lg-10 center-block text-center">
                         <div class="inner">
-                            <a class="logo role-element leadstyle-image-link"><img src="<?= $logo ?>" style="max-width: 355px;"></a>
+                            <a class="banner-logo role-element leadstyle-image-link"><img src="<?= $logo ?>" style="max-width: 355px;"></a>
                             <p class="banner-text role-element leadstyle-text">&nbsp;A new homebuyer discount for <?= $state ?> healthcare professionals.</p>
                             <div class="line banner-line role-element leadstyle-container"></div>
                             <p class="banner-list role-element leadstyle-text">no credit requirements | no income requirements</p>
