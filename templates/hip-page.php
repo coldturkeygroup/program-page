@@ -61,9 +61,28 @@ if ($hover_setting && $hover_setting != '') {
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="utf-8">
-    <title><?php wp_title('&middot;', true, 'right'); ?></title>
+    <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <?php wp_head(); ?>
+    <link rel="apple-touch-icon" sizes="57x57" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://cdn.platform.marketing/assets/programs/hip/favicons/manifest.json">
+    <link rel="mask-icon" href="https://cdn.platform.marketing/assets/programs/hip/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="https://cdn.platform.marketing/assets/programs/hip/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <style>
         <?php
         if( $primary_color != null ) {
@@ -101,9 +120,9 @@ if ($hover_setting && $hover_setting != '') {
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <a href="#section1" class="role-element leadstyle-link">About</a>
-                                    <a href="#section2" class="role-element leadstyle-link">Testimonials</a>
-                                    <a href="#section5" class="role-element leadstyle-link">FAQS</a>
+                                    <a href="#about" class="role-element leadstyle-link">About</a>
+                                    <a href="#testimonials" class="role-element leadstyle-link">Testimonials</a>
+                                    <a href="#faqs" class="role-element leadstyle-link">FAQS</a>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +146,7 @@ if ($hover_setting && $hover_setting != '') {
         </div>
     </div>
 </div>
-<div id="section1" class="wrapper wrapper-center-block about role-element leadstyle-container">
+<div id="about" class="wrapper wrapper-center-block about role-element leadstyle-container">
     <div class="container">
         <div class="row text-center">
             <div class="col-xs-12 col-md-7 vcenter text-left role-element leadstyle-container">
@@ -151,7 +170,7 @@ if ($hover_setting && $hover_setting != '') {
     </div>
 </div>
 
-<div id="section2" class="wrapper wrapper-center-block profiles role-element leadstyle-container">
+<div id="testimonials" class="wrapper wrapper-center-block profiles role-element leadstyle-container">
     <div class="container text-center">
         <div class="row">
             <div class="col-xs-12 col-md-11 col-lg-10 center-block">
@@ -209,7 +228,7 @@ if ($hover_setting && $hover_setting != '') {
         </div>
     </div>
 </div>
-<div id="section5" class="wrapper wrapper-center-block faq role-element leadstyle-container">
+<div id="faqs" class="wrapper wrapper-center-block faq role-element leadstyle-container">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-11 col-lg-10 center-block text-center">
