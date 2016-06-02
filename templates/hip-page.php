@@ -149,7 +149,7 @@ if ($hover_setting && $hover_setting != '') {
 <div id="about" class="wrapper wrapper-center-block about role-element leadstyle-container">
     <div class="container">
         <div class="row text-center">
-            <div class="col-xs-12 col-md-7 vcenter text-left role-element leadstyle-container">
+            <div class="col-xs-12 <?php if($video_url != '') { echo 'col-md-7'; } ?> vcenter text-left role-element leadstyle-container">
                 <div class="fill">
                     <h2 class="text-xs-center text-sm-center role-element leadstyle-text">
                         <strong><span style="color:#6818a5">&lt;</span> What is the HIP program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
@@ -161,11 +161,13 @@ if ($hover_setting && $hover_setting != '') {
                     </p>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-5 vcenter text-right text-xs-center text-sm-center role-element leadstyle-container">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <?= $video_url ?>
+            <?php if($video_url != '') { ?>
+                <div class="col-xs-12 col-md-5 vcenter text-right text-xs-center text-sm-center role-element leadstyle-container">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <?= $video_url ?>
+                    </div>
                 </div>
-            </div>
+            <?php  } ?>
         </div>
     </div>
 </div>
