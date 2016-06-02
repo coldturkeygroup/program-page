@@ -119,7 +119,9 @@ if ($hover_setting && $hover_setting != '') {
                             <div class="row">
                                 <div class="col-xs-12 text-center">
                                     <a href="#about" class="role-element leadstyle-link">About</a>
-                                    <a href="#testimonials" class="role-element leadstyle-link">Testimonials</a>
+                                    <?php if ($test_1_name != '' && $test_1_text != '') { ?>
+                                        <a href="#testimonials" class="role-element leadstyle-link">Testimonials</a>
+                                    <?php } ?>
                                     <a href="#faqs" class="role-element leadstyle-link">FAQS</a>
                                 </div>
                             </div>
@@ -168,64 +170,67 @@ if ($hover_setting && $hover_setting != '') {
     </div>
 </div>
 
-<div id="testimonials" class="wrapper wrapper-center-block profiles role-element leadstyle-container">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-xs-12 col-md-11 col-lg-10 center-block">
-                <h2 class="role-element leadstyle-text">
-                    <span style="font-weight: 700;">&nbsp;</span><b>Testimonials</b></h2>
-                <p class="role-element leadstyle-text">The HIP™ program has already helped healthcare professionals in <?= $county ?> County save thousands of dollars on their home purchases.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
-                <div class="fill">
-                    <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_1_photo ?>" style="max-width: 353px;">
-                    <div class="inner">
-                        <h3 class="role-element leadstyle-text"><?= $test_1_name ?></h3>
-                        <div class="line profiles-line role-element leadstyle-container"></div>
-                        <p class="role-element leadstyle-text">
-                            <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_1_job ?></span>
-                        </p>
-                        <p class="role-element leadstyle-text">
-                            <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 22.8571px; text-align: start;">"<?= $test_1_text ?>"</i><br>
-                        </p>
-                    </div>
+<?php if ($test_1_name != '' && $test_1_text != '') { ?>
+    <div id="testimonials" class="wrapper wrapper-center-block profiles role-element leadstyle-container">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-xs-12 col-md-11 col-lg-10 center-block">
+                    <h2 class="role-element leadstyle-text">
+                        <span style="font-weight: 700;">&nbsp;</span><b>Testimonials</b></h2>
+                    <p class="role-element leadstyle-text">The HIP™ program has already helped healthcare professionals in <?= $county ?> County save thousands of dollars on their home purchases.</p>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
-                <div class="fill">
-                    <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_2_photo ?>" style="max-width: 353px;">
-                    <div class="inner">
-                        <h3 class="role-element leadstyle-text"><?= $test_2_name ?></h3>
-                        <div class="line profiles-line role-element leadstyle-container"></div>
-                        <p class="role-element leadstyle-text">
-                            <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_2_job ?></span>
-                        </p>
-                        <p class="role-element leadstyle-text">
-                            <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 22.8571px; text-align: start;">"<?= $test_2_text ?>"</i>
-                        </p>
+            <div class="row">
+                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                    <div class="fill">
+                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_1_photo ?>" style="max-width: 353px;">
+                        <div class="inner">
+                            <h3 class="role-element leadstyle-text"><?= $test_1_name ?></h3>
+                            <div class="line profiles-line role-element leadstyle-container"></div>
+                            <p class="role-element leadstyle-text">
+                                <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 13px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_1_job ?></span>
+                            </p>
+                            <p class="role-element leadstyle-text">
+                                <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 23px; text-align: start;">"<?= $test_1_text ?>"</i><br>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
-                <div class="fill">
-                    <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_3_photo ?>" style="max-width: 353px;">
-                    <div class="inner">
-                        <h3 class="role-element leadstyle-text"><?= $test_3_name ?></h3>
-                        <div class="line profiles-line role-element leadstyle-container"></div>
-                        <p class="role-element leadstyle-text">
-                            <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_3_job ?></span>
-                        </p>
-                        <p class="role-element leadstyle-text">
-                            <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 22.8571px; text-align: start;">"<?= $test_3_text ?>"</i>
-                        </p>
+                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                    <div class="fill">
+                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_2_photo ?>" style="max-width: 353px;">
+                        <div class="inner">
+                            <h3 class="role-element leadstyle-text"><?= $test_2_name ?></h3>
+                            <div class="line profiles-line role-element leadstyle-container"></div>
+                            <p class="role-element leadstyle-text">
+                                <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 13px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_2_job ?></span>
+                            </p>
+                            <p class="role-element leadstyle-text">
+                                <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 23px; text-align: start;">"<?= $test_2_text ?>"</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                    <div class="fill">
+                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_3_photo ?>" style="max-width: 353px;">
+                        <div class="inner">
+                            <h3 class="role-element leadstyle-text"><?= $test_3_name ?></h3>
+                            <div class="line profiles-line role-element leadstyle-container"></div>
+                            <p class="role-element leadstyle-text">
+                                <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 13px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_3_job ?></span>
+                            </p>
+                            <p class="role-element leadstyle-text">
+                                <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 23px; text-align: start;">"<?= $test_3_text ?>"</i>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php } ?>
+
 <div id="faqs" class="wrapper wrapper-center-block faq role-element leadstyle-container">
     <div class="container">
         <div class="row">
@@ -240,23 +245,23 @@ if ($hover_setting && $hover_setting != '') {
             <div class="col-xs-12 text-center">
                 <ul class="faq-list role-element leadstyle-text">
                     <li>
-                        <font color="#46bec2"><b>Is this only for first time homebuyers?</b></font><br>Absolutely not! If you’re currently employed in the healthcare industry, you can qualify for the HIP discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the HIP credit.
+                        <span style="color: #46bec2; "><b>Is this only for first time homebuyers?</b></span><br>Absolutely not! If you’re currently employed in the healthcare industry, you can qualify for the HIP discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the HIP credit.
                     </li>
                     <li>
-                        <font color="#46bec2"><b>Can I combine this discount with other programs?&nbsp;</b></font><br>Definitely. The HIP program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, first time homebuyer programs, etc).
+                        <span style="color: #46bec2; "><b>Can I combine this discount with other programs?&nbsp;</b></span><br>Definitely. The HIP program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, first time homebuyer programs, etc).
                     </li>
                     <li>
-                        <font color="#46bec2"><b>Are there income or credit requirements for the HIP program?</b></font><br>No. The HIP program is an independent discount for healthcare professionals here in <?= $state ?>. It is
+                        <span style="color: #46bec2; "><b>Are there income or credit requirements for the HIP program?</b></span><br>No. The HIP program is an independent discount for healthcare professionals here in <?= $state ?>. It is
                         <em>not</em> a mortgage program; therefore, there are no income or credit qualifications! You can apply the HIP discount to whatever financing or mortgage product you qualify for.
                     </li>
                     <li>
-                        <font color="#46bec2"><b>Is there a purchase price limitation?</b></font><br>No way! The HIP program was designed to encourage higher rates of homeownership for healthcare professionals here in the <?= $city ?> area. Unlike some other programs, there are no limits on the price of home you can purchase.
+                        <span style="color: #46bec2; "><b>Is there a purchase price limitation?</b></span><br>No way! The HIP program was designed to encourage higher rates of homeownership for healthcare professionals here in the <?= $city ?> area. Unlike some other programs, there are no limits on the price of home you can purchase.
                     </li>
                     <li>
-                        <font color="#46bec2"><b>How long does it take to apply?</b></font><br>The HIP discount does not require extensive paperwork or applications. Most homebuyers find out within 12 hours if they will qualify for the discount.
+                        <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The HIP discount does not require extensive paperwork or applications. Most homebuyers find out within 12 hours if they will qualify for the discount.
                     </li>
                     <li>
-                        <font color="#46bec2"><b>How much money can I save with the HIP discount?</b></font><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $1,500 (or more). This discount can be combined with other mortgage programs to save even more!
+                        <span style="color: #46bec2; "><b>How much money can I save with the HIP discount?</b></span><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $1,500 (or more). This discount can be combined with other mortgage programs to save even more!
                     </li>
                 </ul>
             </div>
@@ -276,29 +281,18 @@ if ($hover_setting && $hover_setting != '') {
 <?php if ($retargeting != null) { ?>
     <!-- Facebook Pixel Code -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq)return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq)f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window,
-            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '<?= $retargeting ?>');
-        fbq('track', "PageView");</script>
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"/>
-    </noscript>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '<?= $retargeting ?>');
+    fbq('track', "PageView");</script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
 <?php } ?>
 <?php wp_footer(); ?>
 <script>
