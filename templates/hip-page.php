@@ -96,8 +96,7 @@ if ($hover_setting && $hover_setting != '') {
             echo '
             .btn:hover,
             .btn:focus {
-                color: ' . $hover_color . ' !important;
-                border-color: ' . $hover_color . ' !important; }
+                background: ' . $hover_color . ' !important; }
             ';
         }
         ?>
@@ -140,7 +139,7 @@ if ($hover_setting && $hover_setting != '') {
                                 <?php if($cta_url != '') { ?>
                                     <a class="btn btn-inline role-element leadstyle-link" href="<?= $cta_url ?>" target="_blank"><?= $cta ?></a>
                                 <?php } else { ?>
-                                    <a class="btn btn-inline role-element leadstyle-link" href="#" data-toggle="modal" data-target="#hip-info"><?= $cta ?></a>
+                                    <a class="btn btn-inline role-element leadstyle-link" href="#" id="hip-info-link"><?= $cta ?></a>
                                 <?php } ?>
                             </div>
                         </div>
@@ -154,8 +153,8 @@ if ($hover_setting && $hover_setting != '') {
     <div class="container">
         <div class="row text-center">
             <div class="col-xs-12 <?php if($video_url != '') { echo 'col-md-7'; } ?> vcenter text-left role-element leadstyle-container">
-                <div class="fill">
-                    <h2 class="text-xs-center text-sm-center role-element leadstyle-text">
+                <div class="<?php if($video_url != '') { echo 'fill'; } ?>">
+                    <h2 class="text-xs-center text-sm-center <?php if($video_url == '') { echo 'text-center'; } ?> role-element leadstyle-text">
                         <strong><span style="color:#6818a5">&lt;</span> What is the HIP program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
                     </h2>
                     <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit health care professionals here in the greater <?= $city ?> area: the <?= $state ?> HIP program. HIP stands for
@@ -321,5 +320,11 @@ if ($hover_setting && $hover_setting != '') {
 <script>
     jQuery('document').ready(function () {
         jQuery('.embed-responsive').children(':first').addClass('embed-responsive-item');
+    });
+
+    jQuery('#hip-info-link').click(function(e) {
+        e.preventDefault();
+
+        jQuery('#hip-info').modal('show');
     });
 </script>

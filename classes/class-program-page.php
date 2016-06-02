@@ -58,18 +58,7 @@ class ProgramPage
         }
 
         // Flush rewrite rules on plugin activation
-        register_activation_hook($file, [$this, 'rewrite_flush']);
-    }
-
-    /**
-     * Functions to be called when the plugin is
-     * deactivated and then reactivated.
-     *
-     */
-    public function rewrite_flush()
-    {
-        $this->register_post_type();
-        flush_rewrite_rules();
+        register_activation_hook($file, [$this, 'register_post_type']);
     }
 
     /**
@@ -118,6 +107,7 @@ class ProgramPage
         ];
 
         register_post_type($this->token, $args);
+        flush_rewrite_rules();
     }
 
     /**
