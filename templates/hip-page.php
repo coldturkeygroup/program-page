@@ -137,7 +137,11 @@ if ($hover_setting && $hover_setting != '') {
                             <div class="line banner-line role-element leadstyle-container"></div>
                             <p class="banner-list role-element leadstyle-text">no credit requirements | no income requirements</p>
                             <div class="btn-inline-wrap">
-                                <a class="btn btn-inline role-element leadstyle-link" href="<?= $cta_url ?>" target="_blank"><?= $cta ?></a>
+                                <?php if($cta_url != '') { ?>
+                                    <a class="btn btn-inline role-element leadstyle-link" href="<?= $cta_url ?>" target="_blank"><?= $cta ?></a>
+                                <?php } else { ?>
+                                    <a class="btn btn-inline role-element leadstyle-link" href="#" data-toggle="modal" data-target="#hip-info"><?= $cta ?></a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -279,6 +283,23 @@ if ($hover_setting && $hover_setting != '') {
         </div>
     </div>
 </footer>
+
+<div class="modal fade" id="hip-info" tabindex="-1" role="dialog" aria-labelledby="hipInfoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="hipInfoLabel">Get Started With The HIP Discount</h4>
+            </div>
+            <div class="modal-body">
+                Call or text <?= $phone ?> to apply for the HIP home buyer discount
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-block btn-default" data-dismiss="modal">Okay!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php if ($retargeting != null) { ?>
     <!-- Facebook Pixel Code -->
