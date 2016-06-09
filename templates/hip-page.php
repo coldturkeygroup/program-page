@@ -16,6 +16,8 @@ $logo = get_post_meta($id, 'logo', true);
 $cta = get_post_meta($id, 'cta', true);
 $cta_url = get_post_meta($id, 'cta_url', true);
 $video_url = get_post_meta($id, 'video_url', true);
+$expected_savings = get_post_meta($id, 'expected_savings', true);
+$program_area = get_post_meta($id, 'program_area', true);
 $broker = get_post_meta($id, 'legal_broker', true);
 $test_1_name = get_post_meta($id, 'test_1_name', true);
 $test_1_job = get_post_meta($id, 'test_1_job', true);
@@ -32,11 +34,19 @@ $test_3_photo = get_post_meta($id, 'test_3_photo', true);
 $retargeting = get_post_meta($id, 'retargeting', true);
 $city = get_option('platform_user_city', 'Minneapolis');
 $state = get_option('platform_user_state', 'Minnesota');
-$county = get_option('platform_user_county', 'Hennepin');
 $phone = get_option('platform_user_phone', '');
 
 if (!$title || $title == '') {
     $title = 'HIP Program';
+}
+
+if ($expected_savings == '') {
+    $expected_savings = '1,500';
+}
+
+if ($program_area == '') {
+    $county = get_option('platform_user_county', 'Hennepin');
+    $program_area = $county . ' County';
 }
 
 // Get the page colors
@@ -136,7 +146,7 @@ if ($hover_setting && $hover_setting != '') {
                             <div class="line banner-line role-element leadstyle-container"></div>
                             <p class="banner-list role-element leadstyle-text">no credit requirements | no income requirements</p>
                             <div class="btn-inline-wrap">
-                                <?php if($cta_url != '') { ?>
+                                <?php if ($cta_url != '') { ?>
                                     <a class="btn btn-inline role-element leadstyle-link" href="<?= $cta_url ?>" target="_blank"><?= $cta ?></a>
                                 <?php } else { ?>
                                     <a class="btn btn-inline role-element leadstyle-link" href="#" id="hip-info-link"><?= $cta ?></a>
@@ -152,25 +162,31 @@ if ($hover_setting && $hover_setting != '') {
 <div id="about" class="wrapper wrapper-center-block about role-element leadstyle-container">
     <div class="container">
         <div class="row text-center">
-            <div class="col-xs-12 <?php if($video_url != '') { echo 'col-md-7'; } ?> vcenter text-left role-element leadstyle-container">
-                <div class="<?php if($video_url != '') { echo 'fill'; } ?>">
-                    <h2 class="text-xs-center text-sm-center <?php if($video_url == '') { echo 'text-center'; } ?> role-element leadstyle-text">
+            <div class="col-xs-12 <?php if ($video_url != '') {
+                echo 'col-md-7';
+            } ?> vcenter text-left role-element leadstyle-container">
+                <div class="<?php if ($video_url != '') {
+                    echo 'fill';
+                } ?>">
+                    <h2 class="text-xs-center text-sm-center <?php if ($video_url == '') {
+                        echo 'text-center';
+                    } ?> role-element leadstyle-text">
                         <strong><span style="color:#6818a5">&lt;</span> What is the HIP program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
                     </h2>
                     <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit health care professionals here in the greater <?= $city ?> area: the <?= $state ?> HIP program. HIP stands for
                         <em>Health Industry Professionals.</em><br><br>As a society, we typically honor public servants like military veterans, teachers, firefighters, and police officers. And we should... these heroes are true public servants! But sometimes we forget that health care professionals are also public servants! They work long, difficult hours to make sure we receive the health care services we need, 24/7/365.<br><br><span style="font-weight: 700;">We want to say thank you. The HIP Program is a special homebuyer credit offered exclusively through <?= $broker ?>
                             <em>.</em></span> It is a discount that is applied to your closing costs—it is NOT a loan. It is a
-                        <em>free credit</em> that will reduce the amount of money that is owed at closing time.<br><br>This special credit will make the American dream of homeownership more affordable for the hardworking health care professionals that serve us here in <?= $county ?> County.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
+                        <em>free credit</em> that will reduce the amount of money that is owed at closing time.<br><br>This special credit will make the American dream of homeownership more affordable for the hardworking health care professionals that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
                     </p>
                 </div>
             </div>
-            <?php if($video_url != '') { ?>
+            <?php if ($video_url != '') { ?>
                 <div class="col-xs-12 col-md-5 vcenter text-right text-xs-center text-sm-center role-element leadstyle-container">
                     <div class="embed-responsive embed-responsive-16by9">
                         <?= $video_url ?>
                     </div>
                 </div>
-            <?php  } ?>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -182,7 +198,7 @@ if ($hover_setting && $hover_setting != '') {
                 <div class="col-xs-12 col-md-11 col-lg-10 center-block">
                     <h2 class="role-element leadstyle-text">
                         <span style="font-weight: 700;">&nbsp;</span><b>Testimonials</b></h2>
-                    <p class="role-element leadstyle-text">The HIP™ program has already helped healthcare professionals in <?= $county ?> County save thousands of dollars on their home purchases.</p>
+                    <p class="role-element leadstyle-text">The HIP™ program has already helped healthcare professionals in <?= $program_area ?> save thousands of dollars on their home purchases.</p>
                 </div>
             </div>
             <div class="row">
@@ -266,7 +282,7 @@ if ($hover_setting && $hover_setting != '') {
                         <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The HIP discount does not require extensive paperwork or applications. Most homebuyers find out within 12 hours if they will qualify for the discount.
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>How much money can I save with the HIP discount?</b></span><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $1,500 (or more). This discount can be combined with other mortgage programs to save even more!
+                        <span style="color: #46bec2; "><b>How much money can I save with the HIP discount?</b></span><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $<?= $expected_savings ?> (or more). This discount can be combined with other mortgage programs to save even more!
                     </li>
                 </ul>
             </div>
@@ -303,17 +319,30 @@ if ($hover_setting && $hover_setting != '') {
 <?php if ($retargeting != null) { ?>
     <!-- Facebook Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','//connect.facebook.net/en_US/fbevents.js');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq)return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq)f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '<?= $retargeting ?>');
-    fbq('track', "PageView");</script>
+        fbq('init', '<?= $retargeting ?>');
+        fbq('track', "PageView");</script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"
-    /></noscript>
+                   src="https://www.facebook.com/tr?id=<?= $retargeting ?>&ev=PageView&noscript=1"
+        /></noscript>
     <!-- End Facebook Pixel Code -->
 <?php } ?>
 <?php wp_footer(); ?>
@@ -322,7 +351,7 @@ if ($hover_setting && $hover_setting != '') {
         jQuery('.embed-responsive').children(':first').addClass('embed-responsive-item');
     });
 
-    jQuery('#hip-info-link').click(function(e) {
+    jQuery('#hip-info-link').click(function (e) {
         e.preventDefault();
 
         jQuery('#hip-info').modal('show');

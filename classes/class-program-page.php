@@ -423,6 +423,24 @@ class ProgramPage
                 'section' => 'info'
             ];
 
+            $fields['expected_savings'] = [
+                'name' => __('Expected Program Savings', $this->token),
+                'description' => __('The amount users of the program can expect to save.', $this->token),
+                'placeholder' => '1,500',
+                'type' => 'text',
+                'default' => '1,500',
+                'section' => 'info'
+            ];
+
+            $fields['program_area'] = [
+                'name' => __('Program Area', $this->token),
+                'description' => __('The area for the program (leave blank to use user county).', $this->token),
+                'placeholder' => '',
+                'type' => 'text',
+                'default' => '',
+                'section' => 'info'
+            ];
+
             $fields['legal_broker'] = [
                 'name' => __('Your Legal Broker', $this->token),
                 'description' => __('This will be displayed on the bottom of the page.', $this->token),
