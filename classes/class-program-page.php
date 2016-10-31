@@ -351,7 +351,7 @@ class ProgramPage
     {
         if (is_singular($this->token)) {
             $program = get_post_meta(get_the_ID(), 'program', true);
-            if ($program == 'HIP Program') {
+            if (in_array($program, ['HIP Program', 'Patriot Program'])) {
                 wp_register_style($this->token, esc_url($this->assets_url . 'css/hip-page.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
             }
             wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
@@ -383,7 +383,7 @@ class ProgramPage
                 'placeholder' => '',
                 'type' => 'select',
                 'default' => 'yes',
-                'options' => ['hip' => 'HIP Program'],
+                'options' => ['hip' => 'HIP Program', 'patriot' => 'Patriot Program'],
                 'section' => 'info'
             ];
 
@@ -608,6 +608,8 @@ class ProgramPage
             $program = get_post_meta(get_the_ID(), 'program', true);
             if ($program == 'HIP Program') {
                 include($this->template_path . 'hip-page.php');
+            } else if ($program == 'Patriot Program') {
+                include($this->template_path . 'patriot-page.php');
             }
             exit;
         }
@@ -640,11 +642,6 @@ class ProgramPage
     public function process_submission()
     {
         if (isset($_POST[$this->token . '_nonce']) && wp_verify_nonce($_POST[$this->token . '_nonce'], $this->token . '_submit_form')) {
-            global $wpdb;
-            $sq_ft = 0;
-            $blog_id = get_current_blog_id();
-            $page_id = sanitize_text_field($_POST['page_id']);
-
             echo json_encode(['status' => 'success']);
             die();
         }

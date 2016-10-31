@@ -1,11 +1,11 @@
 <?php
 /**
- * Template file for displaying HIP Program Page
+ * Template file for displaying Patriot Program Page
  *
  * @package    WordPress
  * @subpackage Program Page
  * @author     The Cold Turkey Group
- * @since      1.0.0
+ * @since      1.1.0
  */
 
 global $program_page, $wp_query;
@@ -37,7 +37,7 @@ $state = get_option('platform_user_state', 'Minnesota');
 $phone = get_option('platform_user_phone', '');
 
 if (!$title || $title == '') {
-    $title = 'HIP Program';
+    $title = 'Patriot Program';
 }
 
 if ($expected_savings == '') {
@@ -72,24 +72,11 @@ if ($hover_setting && $hover_setting != '') {
     <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <?php wp_head(); ?>
-    <link rel="apple-touch-icon" sizes="57x57" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.platform.marketing/assets/programs/hip/favicons/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-194x194.png" sizes="194x194">
-    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/hip/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="https://cdn.platform.marketing/assets/programs/hip/favicons/manifest.json">
-    <link rel="mask-icon" href="https://cdn.platform.marketing/assets/programs/hip/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="https://cdn.platform.marketing/assets/programs/hip/favicons/mstile-144x144.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.platform.marketing/assets/programs/patriot/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/patriot/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://cdn.platform.marketing/assets/programs/patriot/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://cdn.platform.marketing/assets/programs/patriot/favicons/manifest.json">
+    <link rel="mask-icon" href="https://cdn.platform.marketing/assets/programs/patriot/favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
     <style>
         <?php
@@ -116,7 +103,7 @@ if ($hover_setting && $hover_setting != '') {
 <body <?php body_class(); ?>>
 <div class="wrapper wrapper-bg-banner wrapper-center-block banner role-element leadstyle-container">
     <div class="bg-wrapper">
-        <img src="https://cdn.platform.marketing/assets/programs/hip/hip-background.png" class="role-element leadstyle-background-image">
+        <img src="https://cdn.platform.marketing/assets/programs/patriot/patriot-background.png" class="role-element leadstyle-background-image">
     </div>
     <div class="bg-text middle">
         <div class="fill">
@@ -142,7 +129,7 @@ if ($hover_setting && $hover_setting != '') {
                     <div class="col-xs-12 col-md-11 col-lg-10 center-block text-center">
                         <div class="inner">
                             <a class="banner-logo role-element leadstyle-image-link"><img src="<?= $logo ?>" style="max-width: 355px;"></a>
-                            <p class="banner-text role-element leadstyle-text">&nbsp;A new homebuyer discount for <?= $state ?> healthcare professionals.</p>
+                            <p class="banner-text role-element leadstyle-text">&nbsp;A new homebuyer discount for <?= $state ?> veterans and military members.</p>
                             <div class="line banner-line role-element leadstyle-container"></div>
                             <p class="banner-list role-element leadstyle-text">no credit requirements | no income requirements</p>
                             <div class="btn-inline-wrap">
@@ -171,12 +158,10 @@ if ($hover_setting && $hover_setting != '') {
                     <h2 class="text-xs-center text-sm-center <?php if ($video_url == '') {
                         echo 'text-center';
                     } ?> role-element leadstyle-text">
-                        <strong><span style="color:#6818a5">&lt;</span> What is the HIP program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
+                        <strong><span style="color:#6818a5">&lt;</span> What is the <?= $state ?> Patriot program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
                     </h2>
-                    <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit health care professionals here in the greater <?= $city ?> area: the <?= $state ?> HIP program. HIP stands for
-                        <em>Health Industry Professionals.</em><br><br>As a society, we typically honor public servants like military veterans, teachers, firefighters, and police officers. And we should... these heroes are true public servants! But sometimes we forget that health care professionals are also public servants! They work long, difficult hours to make sure we receive the health care services we need, 24/7/365.<br><br><span style="font-weight: 700;">We want to say thank you. The HIP Program is a special homebuyer credit offered exclusively through <?= $broker ?>
-                            <em>.</em></span> It is a discount that is applied to your closing costs—it is NOT a loan. It is a
-                        <em>free credit</em> that will reduce the amount of money that is owed at closing time.<br><br>This special credit will make the American dream of homeownership more affordable for the hardworking health care professionals that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
+                    <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit the military and veteran community here in the greater <?= $city ?> area: the <?= $state ?> Patriot program.<br><br>As a society, we typically honor public servants like teachers, firefighters, and police officers. And we should... these heroes are true public servants! But sometimes we forget that military members are also public servants! They work long, difficult hours to protect our freedom 24/7/365.<br><br><span style="font-weight: 700;">We want to say thank you. The Patriot Program is a special homebuyer credit offered exclusively through <?= $broker ?><em>.</em></span> It is multiple discounts that are applied to your closing costs—it is NOT a loan. It is a
+                      <em>free credit</em> that will reduce the amount of money that is owed at closing time. The discounts include: <ul><li>No PMI (Private Mortgage Insurance)</li><li>Discounted appraisal</li><li>Reduced Closing costs</li><li>Discounted Home Inspection</li></ul><br><br>This special credit will make the American dream of homeownership more affordable for the hardworking military and veteran community that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
                     </p>
                 </div>
             </div>
@@ -198,7 +183,7 @@ if ($hover_setting && $hover_setting != '') {
                 <div class="col-xs-12 col-md-11 col-lg-10 center-block">
                     <h2 class="role-element leadstyle-text">
                         <span style="font-weight: 700;">&nbsp;</span><b>Testimonials</b></h2>
-                    <p class="role-element leadstyle-text">The HIP Program has already helped healthcare professionals in <?= $program_area ?> save thousands of dollars on their home purchases.</p>
+                    <p class="role-element leadstyle-text">The Patriot Program has already helped the military and veteran community in <?= $program_area ?> save thousands of dollars on their home purchases.</p>
                 </div>
             </div>
             <div class="row">
@@ -259,30 +244,30 @@ if ($hover_setting && $hover_setting != '') {
                 <h2 class="role-element leadstyle-text">
                     <strong><span style="color:#6818a5">&lt;</span> Frequently Asked Questions
                         <span style="color:#6818a5">&gt;</span></strong></h2>
-                <p class="role-element leadstyle-text">These are the most common questions about the <?= $state ?> HIP program. For more information call <?= $phone ?></p>
+                <p class="role-element leadstyle-text">These are the most common questions about the <?= $state ?> Patriot Program. For more information call <?= $phone ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">
                 <ul class="faq-list role-element leadstyle-text">
                     <li>
-                        <span style="color: #46bec2; "><b>Is this only for first time homebuyers?</b></span><br>Absolutely not! If you’re currently employed in the healthcare industry, you can qualify for the HIP discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the HIP credit.
+                        <span style="color: #46bec2; "><b>Is this only for first time homebuyers?</b></span><br>Absolutely not! If you’re currently employed in the military or a veteran, you can qualify for the Patriot discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the program credit.
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>Can I combine this discount with other programs?&nbsp;</b></span><br>Definitely. The HIP program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, first time homebuyer programs, etc).
+                        <span style="color: #46bec2; "><b>Can I combine this discount with other programs?&nbsp;</b></span><br>Definitely. The Patriot Program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, VA loans, etc).
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>Are there income or credit requirements for the HIP program?</b></span><br>No. The HIP program is an independent discount for healthcare professionals here in <?= $state ?>. It is
-                        <em>not</em> a mortgage program; therefore, there are no income or credit qualifications! You can apply the HIP discount to whatever financing or mortgage product you qualify for.
+                        <span style="color: #46bec2; "><b>Are there income or credit requirements for the Patriot Program?</b></span><br>No. The Patriot program is an independent discount for military community here in <?= $state ?>. It is
+                        <em>not</em> a mortgage program; therefore, there are no income or credit qualifications! You can apply the Patriot discount to whatever financing or mortgage product you qualify for.
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>Is there a purchase price limitation?</b></span><br>No way! The HIP program was designed to encourage higher rates of homeownership for healthcare professionals here in the <?= $city ?> area. Unlike some other programs, there are no limits on the price of home you can purchase.
+                        <span style="color: #46bec2; "><b>Is there a purchase price limitation?</b></span><br>No way! The Patriot program was designed to encourage higher rates of homeownership for military members and vets here in the <?= $city ?> area. Unlike some other programs, there are no limits on the price of home you can purchase.
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The HIP discount does not require extensive paperwork or applications. Most homebuyers find out within 12 hours if they will qualify for the discount.
+                        <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The Patriot discount does not require extensive paperwork or applications. Most homebuyers find out within 12 hours if they will qualify for the discount.
                     </li>
                     <li>
-                        <span style="color: #46bec2; "><b>How much money can I save with the HIP discount?</b></span><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $<?= $expected_savings ?> (or more). This discount can be combined with other mortgage programs to save even more!
+                        <span style="color: #46bec2; "><b>How much money can I save with the Patriot Program?</b></span><br>The exact number varies, but most homebuyers in the <?= $city ?> area can expect to save around $<?= $expected_savings ?> (or more). This discount can be combined with other mortgage programs to save even more!
                     </li>
                 </ul>
             </div>
@@ -304,10 +289,10 @@ if ($hover_setting && $hover_setting != '') {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="hipInfoLabel">Get Started With The HIP Discount</h4>
+                <h4 class="modal-title" id="hipInfoLabel">Get Started With The Patriot Discount</h4>
             </div>
             <div class="modal-body">
-                Call or text <?= $phone ?> to apply for the HIP home buyer discount
+                Call or text <?= $phone ?> to apply for the Patriot home buyer discount
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-block btn-default" data-dismiss="modal">Okay!</button>
