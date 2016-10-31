@@ -103,7 +103,7 @@ if ($hover_setting && $hover_setting != '') {
 <body <?php body_class(); ?>>
 <div class="wrapper wrapper-bg-banner wrapper-center-block banner role-element leadstyle-container">
     <div class="bg-wrapper">
-        <img src="https://cdn.platform.marketing/assets/programs/patriot/patriot-background.png" class="role-element leadstyle-background-image">
+        <img src="https://cdn.platform.marketing/assets/programs/patriot/patriot-background.jpg" class="role-element leadstyle-background-image">
     </div>
     <div class="bg-text middle">
         <div class="fill">
