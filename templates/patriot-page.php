@@ -103,7 +103,7 @@ if ($hover_setting && $hover_setting != '') {
 <body <?php body_class(); ?>>
 <div class="wrapper wrapper-bg-banner wrapper-center-block banner role-element leadstyle-container">
     <div class="bg-wrapper">
-        <img src="https://cdn.platform.marketing/assets/programs/patriot/patriot-background.jpg" class="role-element leadstyle-background-image">
+        <img src="https://cdn.platform.marketing/assets/programs/patriot/patriot-background.jpg" style="height:50%" class="role-element leadstyle-background-image">
     </div>
     <div class="bg-text middle">
         <div class="fill">
@@ -161,7 +161,7 @@ if ($hover_setting && $hover_setting != '') {
                         <strong><span style="color:#6818a5">&lt;</span> What is the <?= $state ?> Patriot program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
                     </h2>
                     <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit the military and veteran community here in the greater <?= $city ?> area: the <?= $state ?> Patriot program.<br><br>As a society, we typically honor public servants like teachers, firefighters, and police officers. And we should... these heroes are true public servants! But sometimes we forget that military members are also public servants! They work long, difficult hours to protect our freedom 24/7/365.<br><br><span style="font-weight: 700;">We want to say thank you. The Patriot Program is a special homebuyer credit offered exclusively through <?= $broker ?><em>.</em></span> It is multiple discounts that are applied to your closing costs—it is NOT a loan. It is a
-                      <em>free credit</em> that will reduce the amount of money that is owed at closing time. The discounts include: <ul><li>No PMI (Private Mortgage Insurance)</li><li>Discounted appraisal</li><li>Reduced Closing costs</li><li>Discounted Home Inspection</li></ul><br><br>This special credit will make the American dream of homeownership more affordable for the hardworking military and veteran community that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
+                      <em>free credit</em> that will reduce the amount of money that is owed at closing time. The discounts include: <ul><li>No PMI (Private Mortgage Insurance)</li><li>Discounted appraisal</li><li>Reduced Closing costs</li><li>Discounted Home Inspection</li></ul><br>This special credit will make the American dream of homeownership more affordable for the hardworking military and veteran community that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
                     </p>
                 </div>
             </div>
