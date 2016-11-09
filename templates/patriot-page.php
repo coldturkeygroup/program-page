@@ -161,7 +161,13 @@ if ($hover_setting && $hover_setting != '') {
                         <strong><span style="color:#6818a5">&lt;</span> What is the <?= $state ?> Patriot program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
                     </h2>
                     <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit the military and veteran community here in the greater <?= $city ?> area: the <?= $state ?> Patriot program.<br><br>As a society, we typically honor public servants like teachers, firefighters, and police officers. And we should... these heroes are true public servants! But sometimes we forget that military members are also public servants! They work long, difficult hours to protect our freedom 24/7/365.<br><br><span style="font-weight: 700;">We want to say thank you. The Patriot Program is a special homebuyer credit.</span> It is multiple discounts that are applied to your loan and closing costs—it is NOT a loan. It is a
-                      <em>free credit</em> that will reduce the amount of money that is owed at closing time. The discounts include: <ul><li>No PMI (Private Mortgage Insurance)- Part of the VA Loan</li><li>Discounted Appraisal</li><li>Reduced Closing Costs</li><li>Discounted Home Inspection</li><li>Additional Money Towards Closing Costs or Moving Expenses</li></ul><br>This special credit will make the American dream of home ownership more affordable for the hardworking military and veteran community that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
+                      <em>free credit</em> that will reduce the amount of money that is owed at closing time. The discounts include:
+                  <?php if ($city == 'Colorado Springs') { ?>
+                    <ul><li>Free $300 Home Inspection</li><li>$595 closing cost discount</li><li>No PMI (Private Mortgage Insurance)</li></ul>
+                  <?php } else { ?>
+                    <ul><li>No PMI (Private Mortgage Insurance)- Part of the VA Loan</li><li>Discounted Appraisal</li><li>Reduced Closing Costs</li><li>Discounted Home Inspection</li><li>Additional Money Towards Closing Costs or Moving Expenses</li></ul>
+                  <?php } ?>
+                  <br>This special credit will make the American dream of home ownership more affordable for the hardworking military and veteran community that serve us here in <?= $program_area ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time homebuyer to apply for these special credits!</span>
                     </p>
                 </div>
             </div>
