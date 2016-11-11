@@ -351,7 +351,7 @@ class ProgramPage
     {
         if (is_singular($this->token)) {
             $program = get_post_meta(get_the_ID(), 'program', true);
-            if (in_array($program, ['HIP Program', 'Patriot Program'])) {
+            if (in_array($program, ['HIP Program', 'Patriot Program', 'First Responders Program'])) {
                 wp_register_style($this->token, esc_url($this->assets_url . 'css/hip-page.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
             }
             wp_register_style('animate', esc_url($this->assets_url . 'css/animate.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
@@ -383,7 +383,7 @@ class ProgramPage
                 'placeholder' => '',
                 'type' => 'select',
                 'default' => 'yes',
-                'options' => ['hip' => 'HIP Program', 'patriot' => 'Patriot Program'],
+                'options' => ['hip' => 'HIP Program', 'patriot' => 'Patriot Program', 'responders' => 'First Responders Program'],
                 'section' => 'info'
             ];
 
@@ -610,6 +610,8 @@ class ProgramPage
                 include($this->template_path . 'hip-page.php');
             } else if ($program == 'Patriot Program') {
                 include($this->template_path . 'patriot-page.php');
+            } else if ($program == 'First Responders Program') {
+                include($this->template_path . 'first-responders-page.php');
             }
             exit;
         }
