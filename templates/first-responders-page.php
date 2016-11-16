@@ -224,7 +224,7 @@ if ($hover_setting && $hover_setting != '') {
                                 <span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 13px; letter-spacing: normal; line-height: normal; text-align: start;"><?= $test_1_job ?></span>
                             </p>
                             <p class="role-element leadstyle-text">
-                                <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 23px; text-align: start;"><?= $test_1_text ?></i><br>
+                                <i style="color: rgb(47, 47, 47); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; letter-spacing: normal; line-height: 23px; text-align: start;"><?= $test_1_text ?></i>
                             </p>
                         </div>
                     </div>
