@@ -35,6 +35,11 @@ $retargeting = get_post_meta($id, 'retargeting', true);
 $city = get_option('platform_user_city', 'Minneapolis');
 $state = get_option('platform_user_state', 'Minnesota');
 $phone = get_option('platform_user_phone', '');
+$testimonials_col_md = 'col-md-6';
+
+if($test_1_name !== '' && $test_2_name != '' && $test_3_name != '') {
+  $testimonials_col_md = 'col-md-4';
+}
 
 if (!$title || $title == '') {
     $title = 'First Responders Program';
@@ -191,7 +196,7 @@ if ($hover_setting && $hover_setting != '') {
     </div>
 </div>
 
-<?php if ($test_1_name != '' && $test_1_text != '') { ?>
+<?php if ($test_1_name != '') { ?>
     <div id="testimonials" class="wrapper wrapper-center-block profiles role-element leadstyle-container">
         <div class="container text-center">
             <div class="row">
@@ -202,9 +207,16 @@ if ($hover_setting && $hover_setting != '') {
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                <?php if ($test_1_name != '') { ?>
+                <div class="col-xs-12 <?= $testimonials_col_md ?> center-block center-block-inline role-element leadstyle-container">
                     <div class="fill">
-                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_1_photo ?>" style="max-width: 353px;">
+                        <?php if(strpos($test_1_photo, 'cdn.platform.marketing') !== false) { ?>
+                          <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_1_photo ?>" style="max-width: 353px;">
+                        <?php } else { ?>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?= $test_1_photo ?>"></iframe>
+                          </div>
+                        <?php } ?>
                         <div class="inner">
                             <h3 class="role-element leadstyle-text"><?= $test_1_name ?></h3>
                             <div class="line profiles-line role-element leadstyle-container"></div>
@@ -217,9 +229,17 @@ if ($hover_setting && $hover_setting != '') {
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                <?php } ?>
+                <?php if ($test_2_name != '') { ?>
+                <div class="col-xs-12 <?= $testimonials_col_md ?> center-block center-block-inline role-element leadstyle-container">
                     <div class="fill">
-                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_2_photo ?>" style="max-width: 353px;">
+                        <?php if(strpos($test_2_photo, 'cdn.platform.marketing') !== false) { ?>
+                          <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_2_photo ?>" style="max-width: 353px;">
+                        <?php } else { ?>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?= $test_2_photo ?>"></iframe>
+                          </div>
+                        <?php } ?>
                         <div class="inner">
                             <h3 class="role-element leadstyle-text"><?= $test_2_name ?></h3>
                             <div class="line profiles-line role-element leadstyle-container"></div>
@@ -232,9 +252,17 @@ if ($hover_setting && $hover_setting != '') {
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4 center-block center-block-inline role-element leadstyle-container">
+                <?php } ?>
+                <?php if ($test_3_name != '') { ?>
+                <div class="col-xs-12 <?= $testimonials_col_md ?> center-block center-block-inline role-element leadstyle-container">
                     <div class="fill">
-                        <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_3_photo ?>" style="max-width: 353px;">
+                        <?php if(strpos($test_3_photo, 'cdn.platform.marketing') !== false) { ?>
+                          <img class="img-responsive img-inline role-element leadstyle-image" src="<?= $test_3_photo ?>" style="max-width: 353px;">
+                        <?php } else { ?>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?= $test_3_photo ?>"></iframe>
+                          </div>
+                        <?php } ?>
                         <div class="inner">
                             <h3 class="role-element leadstyle-text"><?= $test_3_name ?></h3>
                             <div class="line profiles-line role-element leadstyle-container"></div>
@@ -247,6 +275,7 @@ if ($hover_setting && $hover_setting != '') {
                         </div>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>
