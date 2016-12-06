@@ -1,4 +1,6 @@
-<?php namespace ColdTurkey\ProgramPage;
+<?php
+
+namespace ColdTurkey\ProgramPage;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly.
 

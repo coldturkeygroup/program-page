@@ -1,9 +1,11 @@
-<?php namespace ColdTurkey\ProgramPage;
+<?php
+
+namespace ColdTurkey\ProgramPage;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly.
 
 // Composer autoloader
-require_once PROGRAM_PAGE_PLUGIN_PATH . 'assets/vendor/autoload.php';
+require_once PROGRAM_PAGE_PLUGIN_PATH . '../vendor/autoload.php';
 
 class ProgramPage
 {
