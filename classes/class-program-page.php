@@ -459,6 +459,15 @@ class ProgramPage
                 'section'     => 'info'
             ];
 
+            $fields['phone_number'] = [
+                'name'        => __('Phone Number', $this->token),
+                'description' => __('The phone number for the program (leave blank to use user phone number).', $this->token),
+                'placeholder' => '',
+                'type'        => 'text',
+                'default'     => '',
+                'section'     => 'info'
+            ];
+
             $fields['legal_broker'] = [
                 'name'        => __('Your Legal Broker', $this->token),
                 'description' => __('This will be displayed on the bottom of the page.', $this->token),

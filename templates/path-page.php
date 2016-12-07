@@ -18,6 +18,7 @@ $cta_url = get_post_meta($id, 'cta_url', true);
 $video_url = get_post_meta($id, 'video_url', true);
 $expected_savings = get_post_meta($id, 'expected_savings', true);
 $program_area = get_post_meta($id, 'program_area', true);
+$phone = get_post_meta($id, 'phone_number', true);
 $broker = get_post_meta($id, 'legal_broker', true);
 $test_1_name = get_post_meta($id, 'test_1_name', true);
 $test_1_job = get_post_meta($id, 'test_1_job', true);
@@ -34,7 +35,6 @@ $test_3_photo = get_post_meta($id, 'test_3_photo', true);
 $retargeting = get_post_meta($id, 'retargeting', true);
 $city = get_option('platform_user_city', 'Minneapolis');
 $state = get_option('platform_user_state', 'Minnesota');
-$phone = get_option('platform_user_phone', '');
 $testimonials_col_md = 'col-md-6';
 
 if($test_1_name !== '' && $test_2_name != '' && $test_3_name != '') {
@@ -52,6 +52,10 @@ if ($expected_savings == '') {
 if ($program_area == '') {
     $county = get_option('platform_user_county', 'Hennepin');
     $program_area = $county . ' County';
+}
+
+if ($phone == '') {
+    $phone = get_option('platform_user_phone', '');
 }
 
 // Get the page colors
