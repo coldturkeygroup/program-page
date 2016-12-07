@@ -3,13 +3,13 @@ Contributors: Aaron Huisinga
 Tags: real estate, platform, days on market
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 1.3.2
+Stable tag: 1.4
 
-Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, and First Responder Programs).
+Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, PATH, and First Responder Programs).
 
 == Description ==
 
-Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, and First Responder Programs).
+Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, PATH, and First Responder Programs).
 
 == Installation ==
 

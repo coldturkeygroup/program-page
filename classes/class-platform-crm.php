@@ -97,9 +97,9 @@ class PlatformCRM
      * Create a prospect on platformcrm.com
      * using the given data.
      *
-     * @param array $data
+     * @param $data
      *
-     * @return json|null
+     * @return array|null
      */
     public function createProspect($data)
     {
