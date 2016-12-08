@@ -452,7 +452,7 @@ class ProgramPage
 
             $fields['program_area'] = [
                 'name'        => __('Program Area', $this->token),
-                'description' => __('The area for the program (leave blank to use user county).', $this->token),
+                'description' => __('The area for the program (leave blank to use user city & county).', $this->token),
                 'placeholder' => '',
                 'type'        => 'text',
                 'default'     => '',
