@@ -4,7 +4,7 @@ namespace ColdTurkey\ProgramPage;
 
 /*
  * Plugin Name: Program Page
- * Version: 1.5.1
+ * Version: 1.5.2
  * Plugin URI: http://www.coldturkeygroup.com/
  * Description: Custom info pages for Platform ad campaigns
  * Author: Cold Turkey Group
