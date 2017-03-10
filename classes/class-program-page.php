@@ -368,7 +368,7 @@ class ProgramPage
                 'HIP Program',
                 'Patriot Program',
                 'PATH Program',
-                'PSD Program',
+                'HEROES Program',
                 'First Responders Program'
             ])) {
                 wp_register_style($this->token, esc_url($this->assets_url . 'css/hip-page.css'), [], PROGRAM_PAGE_PLUGIN_VERSION);
@@ -406,7 +406,7 @@ class ProgramPage
                     'hip'        => 'HIP Program',
                     'patriot'    => 'Patriot Program',
                     'path'       => 'PATH Program',
-                    'psd'        => 'PSD Program',
+                    'heroes'     => 'HEROES Program',
                     'responders' => 'First Responders Program'
                 ],
                 'section'     => 'info'
@@ -646,7 +646,7 @@ class ProgramPage
                 include($this->template_path . 'patriot-page.php');
             } else if ($program == 'PATH Program') {
                 include($this->template_path . 'path-page.php');
-            } else if ($program == 'PSD Program') {
+            } else if (in_array($program, ['PSD Program', 'HEROES Program'])) {
                 include($this->template_path . 'psd-page.php');
             } else if ($program == 'First Responders Program') {
                 include($this->template_path . 'first-responders-page.php');

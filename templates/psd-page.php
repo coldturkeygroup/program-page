@@ -1,6 +1,6 @@
 <?php
 /**
- * Template file for displaying PSD Program Page
+ * Template file for displaying HEROES Program Page
  *
  * @package    WordPress
  * @subpackage Program Page
@@ -44,7 +44,7 @@ if ($test_1_name !== '' && $test_2_name != '' && $test_3_name != '') {
 }
 
 if (!$title || $title == '') {
-    $title = 'PSD Program';
+    $title = 'HEROES Program';
 }
 
 if ($expected_savings == '') {
@@ -173,9 +173,9 @@ if ($hover_setting && $hover_setting != '') {
           <h2 class="text-xs-center text-sm-center <?php if ($video_url == '') {
               echo 'text-center';
           } ?> role-element leadstyle-text">
-            <strong><span style="color:#6818a5">&lt;</span> What is the <?= $state ?> PSD program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
+            <strong><span style="color:#6818a5">&lt;</span> What is the <?= $state ?> HEROES program?&nbsp;<span style="color:#6818a5">&gt;</span></strong>
           </h2>
-          <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit the educators and public employees here in <?= $program_area['city'] ?>: the <?= $state ?> PSD Program. We want to give back to help these individuals onto the PSD of home ownership!<br><br>We want to help mitigate the home buying cost for our everyday heroes! Teachers, firefighters, police officers, etc. These professions protect us and play an integral part of growing our future generations. These heroes are true public servants!<br><br><span style="font-weight: 700;">We want to say thank you. The PSD Program is a special home buyer credit.</span> It is a
+          <p class="role-element leadstyle-text">We’re excited to announce a new program that will benefit the educators and public employees here in <?= $program_area['city'] ?>: the <?= $state ?> HEROES Program. We want to give back to help these individuals onto the HEROES of home ownership!<br><br>We want to help mitigate the home buying cost for our everyday heroes! Teachers, firefighters, police officers, etc. These professions protect us and play an integral part of growing our future generations. These heroes are true public servants!<br><br><span style="font-weight: 700;">We want to say thank you. The HEROES Program is a special home buyer credit.</span> It is a
             <em>free credit</em> that will reduce the amount of money that is owed at closing time.<br><br>This special credit will make the American dream of home ownership more affordable for the hardworking every day heroes that serve us here in <?= $program_area['county'] ?>.<br><br><span style="font-weight: 700;">You do NOT have to be a first time home buyer to apply for these special credits!</span>
           </p>
         </div>
@@ -198,7 +198,7 @@ if ($hover_setting && $hover_setting != '') {
         <div class="col-xs-12 col-md-11 col-lg-10 center-block">
           <h2 class="role-element leadstyle-text">
             <span style="font-weight: 700;">&nbsp;</span><b>Testimonials</b></h2>
-          <p class="role-element leadstyle-text">The PSD Program has already helped the community in <?= $program_area['county'] ?> save thousands of dollars on their home purchases.</p>
+          <p class="role-element leadstyle-text">The HEROES Program has already helped the community in <?= $program_area['county'] ?> save thousands of dollars on their home purchases.</p>
         </div>
       </div>
       <div class="row">
@@ -283,36 +283,36 @@ if ($hover_setting && $hover_setting != '') {
         <h2 class="role-element leadstyle-text">
           <strong><span style="color:#6818a5">&lt;</span> Frequently Asked Questions
             <span style="color:#6818a5">&gt;</span></strong></h2>
-        <p class="role-element leadstyle-text">These are the most common questions about the <?= $state ?> PSD Program. For more information call <?= $phone ?></p>
+        <p class="role-element leadstyle-text">These are the most common questions about the <?= $state ?> HEROES Program. For more information call <?= $phone ?></p>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12 text-center">
         <ul class="faq-list role-element leadstyle-text">
           <li>
-            <span style="color: #46bec2; "><b>Is this only for first time home buyers?</b></span><br>Absolutely not! If you’re currently employed in education or public service, you can qualify for the PSD discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the PSD credit.
+            <span style="color: #46bec2; "><b>Is this only for first time home buyers?</b></span><br>Absolutely not! If you’re currently employed in education or public service, you can qualify for the HEROES discount. Even if you currently own a home, your next home purchase (in the state of <?= $state ?>) could be eligible for the HEROES credit.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>Are there any application or up-front fees?</b></span><br>NO. There are NEVER any up-front or application fees for the PSD program.
+            <span style="color: #46bec2; "><b>Are there any application or up-front fees?</b></span><br>NO. There are NEVER any up-front or application fees for the HEROES program.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>Can I only buy certain homes?</b></span><br>No! You may use the PSD discount to purchase any home on the market as long as it is within the guidelines of your loan approval.
+            <span style="color: #46bec2; "><b>Can I only buy certain homes?</b></span><br>No! You may use the HEROES discount to purchase any home on the market as long as it is within the guidelines of your loan approval.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>Can I combine this discount with other programs?&nbsp;</b></span><br>Definitely. The PSD Program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, first time home buyer programs, etc).
+            <span style="color: #46bec2; "><b>Can I combine this discount with other programs?&nbsp;</b></span><br>Definitely. The HEROES Program is technically not a mortgage program (it is an independent discount). This means you can apply the discount on top of any other programs you may be eligible for (FHA loans, first time home buyer programs, etc).
           </li>
           <li>
-            <span style="color: #46bec2; "><b>Are there income or credit requirements for the PSD Program?</b></span><br>No. The PSD Program is an independent discount for educators and public servants here in <?= $state ?>. It is
-            <em>not</em> a mortgage program; therefore, there are no income or credit qualifications! You can apply the PSD discount to whatever financing or mortgage product you qualify for.
+            <span style="color: #46bec2; "><b>Are there income or credit requirements for the HEROES Program?</b></span><br>No. The HEROES Program is an independent discount for educators and public servants here in <?= $state ?>. It is
+            <em>not</em> a mortgage program; therefore, there are no income or credit qualifications! You can apply the HEROES discount to whatever financing or mortgage product you qualify for.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>Is there a purchase price limitation?</b></span><br>No way! The PSD Program was designed to encourage higher rates of home ownership for educators and public servants here in <?= $program_area['city'] ?>. Unlike some other programs, there are no limits on the price of home you can purchase.
+            <span style="color: #46bec2; "><b>Is there a purchase price limitation?</b></span><br>No way! The HEROES Program was designed to encourage higher rates of home ownership for educators and public servants here in <?= $program_area['city'] ?>. Unlike some other programs, there are no limits on the price of home you can purchase.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The PSD discount does not require extensive paperwork or applications. Most home buyers find out within 12 hours if they will qualify for the discount.
+            <span style="color: #46bec2; "><b>How long does it take to apply?</b></span><br>The HEROES discount does not require extensive paperwork or applications. Most home buyers find out within 12 hours if they will qualify for the discount.
           </li>
           <li>
-            <span style="color: #46bec2; "><b>How much money can I save with the PSD Program?</b></span><br>The exact number varies, but most home buyers in <?= $program_area['city'] ?> can expect to save around $<?= $expected_savings ?> (or more). This discount can be combined with other mortgage programs to save even more!
+            <span style="color: #46bec2; "><b>How much money can I save with the HEROES Program?</b></span><br>The exact number varies, but most home buyers in <?= $program_area['city'] ?> can expect to save around $<?= $expected_savings ?> (or more). This discount can be combined with other mortgage programs to save even more!
           </li>
         </ul>
       </div>
@@ -334,10 +334,10 @@ if ($hover_setting && $hover_setting != '') {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="hipInfoLabel">Get Started With The PSD Discount</h4>
+        <h4 class="modal-title" id="hipInfoLabel">Get Started With The HEROES Discount</h4>
       </div>
       <div class="modal-body">
-        Call or text <?= $phone ?> to apply for the PSD home buyer discount
+        Call or text <?= $phone ?> to apply for the HEROES home buyer discount
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-block btn-default" data-dismiss="modal">Okay!</button>
