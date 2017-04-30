@@ -4,7 +4,7 @@ namespace ColdTurkey\ProgramPage;
 
 /*
  * Plugin Name: Program Page
- * Version: 1.5.4
+ * Version: 1.5.5
  * Plugin URI: http://www.coldturkeygroup.com/
  * Description: Custom info pages for Platform ad campaigns
  * Author: Cold Turkey Group
@@ -23,7 +23,7 @@ if ( ! defined( 'PROGRAM_PAGE_PLUGIN_PATH' ) )
 	define( 'PROGRAM_PAGE_PLUGIN_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
 if ( ! defined( 'PROGRAM_PAGE_PLUGIN_VERSION' ) )
-	define( 'PROGRAM_PAGE_PLUGIN_VERSION', '1.5.4' );
+	define( 'PROGRAM_PAGE_PLUGIN_VERSION', '1.5.5' );
 
 require_once( 'classes/class-program-page.php' );
 
