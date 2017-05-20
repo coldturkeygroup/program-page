@@ -2,4 +2,4 @@
 
 ## Introduction
 
-Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, PATH, PSD, and First Responders Programs).
+Custom info pages for Platform ad campaigns (currently supports the HIP, Patriot, PATH, PSD, BOOST, and First Responders Programs).
